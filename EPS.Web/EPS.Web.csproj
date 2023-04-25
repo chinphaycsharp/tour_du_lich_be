@@ -1,0 +1,176 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="dist\**" />
+    <Compile Remove="src\views\manage\**" />
+    <Compile Remove="wwwroot\**" />
+    <Content Remove="dist\**" />
+    <Content Remove="src\views\manage\**" />
+    <Content Remove="wwwroot\**" />
+    <EmbeddedResource Remove="dist\**" />
+    <EmbeddedResource Remove="src\views\manage\**" />
+    <EmbeddedResource Remove="wwwroot\**" />
+    <None Remove="dist\**" />
+    <None Remove="src\views\manage\**" />
+    <None Remove="wwwroot\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="src\assets\jquery\core.js" />
+    <None Remove="src\assets\jquery\jquery-ajax-blob-arraybuffer.js" />
+    <None Remove="src\assets\jquery\jquery.js" />
+    <None Remove="src\assets\jquery\jquery.min.js" />
+    <None Remove="src\assets\jquery\jquery.slim.js" />
+    <None Remove="src\assets\jquery\jquery.slim.min.js" />
+    <None Remove="src\components\BGrid.vue" />
+    <None Remove="src\components\HtmlEditor.vue" />
+    <None Remove="src\components\ImageUpload.vue" />
+    <None Remove="src\components\Select2.vue" />
+    <None Remove="src\components\UnitTree.vue" />
+    <None Remove="src\shared\mixins.js" />
+    <None Remove="src\store\index.js" />
+    <None Remove="src\utils\common.js" />
+    <None Remove="src\utils\services.js" />
+    <None Remove="src\views\Home.vue" />
+    <None Remove="src\views\pages\Login.vue" />
+    <None Remove="src\views\pages\Page404.vue" />
+    <None Remove="src\views\pages\Page500.vue" />
+    <None Remove="src\views\pages\Register.vue" />
+    <None Remove="src\views\system\roles\create.vue" />
+    <None Remove="src\views\system\roles\detail.vue" />
+    <None Remove="src\views\system\roles\list.vue" />
+    <None Remove="src\views\system\roles\privileges.vue" />
+    <None Remove="src\views\system\users\create.vue" />
+    <None Remove="src\views\system\users\detail.vue" />
+    <None Remove="src\views\system\users\list.vue" />
+    <None Remove="src\views\system\users\privileges.vue" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="src\assets\jquery\core.js">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="src\assets\jquery\jquery-ajax-blob-arraybuffer.js">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="src\assets\jquery\jquery.js">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="src\assets\jquery\jquery.min.js">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="src\assets\jquery\jquery.slim.js">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="src\assets\jquery\jquery.slim.min.js">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="src\components\BGrid.vue">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="src\components\HtmlEditor.vue">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="src\components\ImageUpload.vue">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="src\components\Select2.vue">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="src\components\UnitTree.vue">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="src\shared\mixins.js">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="src\store\index.js">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="src\store\modules\common.js">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="src\store\modules\identity.js">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="src\utils\common.js">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="src\utils\services.js">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="src\views\home.vue">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="src\views\pages\Login.vue">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="src\views\pages\Page404.vue">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="src\views\pages\Page500.vue">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="src\views\pages\Register.vue">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="src\views\system\roles\create.vue">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="src\views\system\roles\detail.vue">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="src\views\system\roles\list.vue">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="src\views\system\roles\privileges.vue">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="src\views\system\users\create.vue">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="src\views\system\users\detail.vue">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="src\views\system\users\list.vue">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="src\views\system\users\privileges.vue">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+  </ItemGroup>
+
+</Project>
