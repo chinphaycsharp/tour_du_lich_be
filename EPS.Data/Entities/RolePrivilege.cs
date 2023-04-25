@@ -14,6 +14,7 @@ namespace EPS.Data.Entities
         [ForeignKey("PrivilegeId")]
         [InverseProperty("RolePrivileges")]
         public virtual Privilege Privilege { get; set; }
+
         [ForeignKey("RoleId")]
         [InverseProperty("RolePrivileges")]
         public virtual Role Role { get; set; }

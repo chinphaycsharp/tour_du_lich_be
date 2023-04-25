@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EPS.Data.Migrations
 {
     [DbContext(typeof(EPSContext))]
-    [Migration("20230424142703_init-db")]
+    [Migration("20230425040542_init-db")]
     partial class initdb
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

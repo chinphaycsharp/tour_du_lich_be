@@ -87,7 +87,6 @@ namespace EPS.API
             services.AddScoped<AuthorizationService>();
             services.AddScoped<LookupService>();
             services.AddScoped<EmailService>();
-            services.AddScoped<ImageService>();
             ConfigureJwtAuthService(services);
 
             services.AddMvc(x => x.EnableEndpointRouting = false).SetCompatibilityVersion(CompatibilityVersion.Version_3_0).AddNewtonsoftJson();

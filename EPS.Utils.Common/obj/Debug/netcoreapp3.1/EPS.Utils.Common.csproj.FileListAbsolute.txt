@@ -61,3 +61,13 @@ C:\Users\Admin\Desktop\at_smpservice-dev\EPS.Utils.Common\obj\Debug\netcoreapp3.
 C:\Users\Admin\Desktop\at_smpservice-dev\EPS.Utils.Common\obj\Debug\netcoreapp3.1\EPS.Utils.Common.csproj.CoreCompileInputs.cache
 C:\Users\Admin\Desktop\at_smpservice-dev\EPS.Utils.Common\obj\Debug\netcoreapp3.1\EPS.Utils.Common.dll
 C:\Users\Admin\Desktop\at_smpservice-dev\EPS.Utils.Common\obj\Debug\netcoreapp3.1\EPS.Utils.Common.pdb
+D:\tour_du_lich_be\EPS.Utils.Common\bin\Debug\netcoreapp3.1\EPS.Utils.Common.deps.json
+D:\tour_du_lich_be\EPS.Utils.Common\bin\Debug\netcoreapp3.1\EPS.Utils.Common.dll
+D:\tour_du_lich_be\EPS.Utils.Common\bin\Debug\netcoreapp3.1\EPS.Utils.Common.pdb
+D:\tour_du_lich_be\EPS.Utils.Common\obj\Debug\netcoreapp3.1\EPS.Utils.Common.csproj.AssemblyReference.cache
+D:\tour_du_lich_be\EPS.Utils.Common\obj\Debug\netcoreapp3.1\EPS.Utils.Common.GeneratedMSBuildEditorConfig.editorconfig
+D:\tour_du_lich_be\EPS.Utils.Common\obj\Debug\netcoreapp3.1\EPS.Utils.Common.AssemblyInfoInputs.cache
+D:\tour_du_lich_be\EPS.Utils.Common\obj\Debug\netcoreapp3.1\EPS.Utils.Common.AssemblyInfo.cs
+D:\tour_du_lich_be\EPS.Utils.Common\obj\Debug\netcoreapp3.1\EPS.Utils.Common.csproj.CoreCompileInputs.cache
+D:\tour_du_lich_be\EPS.Utils.Common\obj\Debug\netcoreapp3.1\EPS.Utils.Common.dll
+D:\tour_du_lich_be\EPS.Utils.Common\obj\Debug\netcoreapp3.1\EPS.Utils.Common.pdb
