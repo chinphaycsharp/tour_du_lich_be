@@ -78,27 +78,13 @@ namespace EPS.API.Controllers
             var rowEnd = data.Count + 2;
             var tbl = worksheet.Tables.Add(new ExcelAddressBase(fromRow: 2, fromCol: 1, toRow: rowEnd, toColumn: 5), "Applicant");
             tbl.ShowHeader = true;
-            tbl.TableStyle = TableStyles.Dark9;
+            tbl.TableStyle = TableStyles.Dark9; 
             tbl.ShowTotal = true;
             worksheet.Cells[rowEnd, 3].Style.Numberformat.Format = numberformat;
 
             // AutoFitColumns
             worksheet.Cells[2, 1, rowEnd, 5].AutoFitColumns();
             return p;
-        }
-
-        [CustomAuthorize(PrivilegeList.ViewTree)]
-        [HttpGet("exceluser")]
-        public IActionResult ExcelUser([FromQuery] UserGridPagingDto pagingModel)
-        {
-            var data = _authorizationService.GetUsers(pagingModel).Result.Data;
-            
-            byte[] reportBytes;
-            using (var package = getApplicantsStatistics(data))
-            {
-                reportBytes = package.GetAsByteArray();
-            }
-            return File(reportBytes, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "users.xlsx");
         }
 
         [CustomAuthorize(PrivilegeList.ViewUser)]

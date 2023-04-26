@@ -138,7 +138,8 @@ namespace EPS.API
             app.UseStaticFiles();
             app.UseMvc();
 
-            DbInitializer.Initialize(app.ApplicationServices);
+            // cai nay chay lan dau tien thoi, nhung lan sau comment no lai
+            //DbInitializer.Initialize(app.ApplicationServices);
         }
 
         public void ConfigureJwtAuthService(IServiceCollection services)
