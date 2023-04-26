@@ -32,7 +32,7 @@ namespace EPS.API.Controllers
 
         [CustomAuthorize(PrivilegeList.ManageCategory)]
         [HttpPost]
-        public async Task<ApiResult<int>> CreatePost([FromForm] CategoryCreateDto dto)
+        public async Task<ApiResult<int>> CreateCategory([FromForm] CategoryCreateDto dto)
         {
             dto.created_time = DateTime.Now;
             ApiResult<int> result = new ApiResult<int>();

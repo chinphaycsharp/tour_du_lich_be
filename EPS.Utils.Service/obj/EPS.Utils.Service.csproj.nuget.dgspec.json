@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\tour_du_lich_be\\EPS.Utils.Service\\EPS.Utils.Service.csproj": {}
+    "C:\\Users\\Admin\\Desktop\\at_smpservice-dev\\EPS.Utils.Service\\EPS.Utils.Service.csproj": {}
   },
   "projects": {
-    "D:\\tour_du_lich_be\\EPS.Utils.Common\\EPS.Utils.Common.csproj": {
+    "C:\\Users\\Admin\\Desktop\\at_smpservice-dev\\EPS.Utils.Common\\EPS.Utils.Common.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\tour_du_lich_be\\EPS.Utils.Common\\EPS.Utils.Common.csproj",
+        "projectUniqueName": "C:\\Users\\Admin\\Desktop\\at_smpservice-dev\\EPS.Utils.Common\\EPS.Utils.Common.csproj",
         "projectName": "EPS.Utils.Common",
-        "projectPath": "D:\\tour_du_lich_be\\EPS.Utils.Common\\EPS.Utils.Common.csproj",
+        "projectPath": "C:\\Users\\Admin\\Desktop\\at_smpservice-dev\\EPS.Utils.Common\\EPS.Utils.Common.csproj",
         "packagesPath": "C:\\Users\\Admin\\.nuget\\packages\\",
-        "outputPath": "D:\\tour_du_lich_be\\EPS.Utils.Common\\obj\\",
+        "outputPath": "C:\\Users\\Admin\\Desktop\\at_smpservice-dev\\EPS.Utils.Common\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -26,7 +26,6 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -56,8 +55,7 @@
             "net47",
             "net471",
             "net472",
-            "net48",
-            "net481"
+            "net48"
           ],
           "assetTargetFallback": true,
           "warn": true,
@@ -66,18 +64,18 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.203\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.406\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "D:\\tour_du_lich_be\\EPS.Utils.Repository\\EPS.Utils.Repository.csproj": {
+    "C:\\Users\\Admin\\Desktop\\at_smpservice-dev\\EPS.Utils.Repository\\EPS.Utils.Repository.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\tour_du_lich_be\\EPS.Utils.Repository\\EPS.Utils.Repository.csproj",
+        "projectUniqueName": "C:\\Users\\Admin\\Desktop\\at_smpservice-dev\\EPS.Utils.Repository\\EPS.Utils.Repository.csproj",
         "projectName": "EPS.Utils.Repository",
-        "projectPath": "D:\\tour_du_lich_be\\EPS.Utils.Repository\\EPS.Utils.Repository.csproj",
+        "projectPath": "C:\\Users\\Admin\\Desktop\\at_smpservice-dev\\EPS.Utils.Repository\\EPS.Utils.Repository.csproj",
         "packagesPath": "C:\\Users\\Admin\\.nuget\\packages\\",
-        "outputPath": "D:\\tour_du_lich_be\\EPS.Utils.Repository\\obj\\",
+        "outputPath": "C:\\Users\\Admin\\Desktop\\at_smpservice-dev\\EPS.Utils.Repository\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -92,15 +90,14 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "netcoreapp3.1": {
             "targetAlias": "netcoreapp3.1",
             "projectReferences": {
-              "D:\\tour_du_lich_be\\EPS.Utils.Common\\EPS.Utils.Common.csproj": {
-                "projectPath": "D:\\tour_du_lich_be\\EPS.Utils.Common\\EPS.Utils.Common.csproj"
+              "C:\\Users\\Admin\\Desktop\\at_smpservice-dev\\EPS.Utils.Common\\EPS.Utils.Common.csproj": {
+                "projectPath": "C:\\Users\\Admin\\Desktop\\at_smpservice-dev\\EPS.Utils.Common\\EPS.Utils.Common.csproj"
               }
             }
           }
@@ -142,8 +139,7 @@
             "net47",
             "net471",
             "net472",
-            "net48",
-            "net481"
+            "net48"
           ],
           "assetTargetFallback": true,
           "warn": true,
@@ -152,18 +148,18 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.203\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.406\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "D:\\tour_du_lich_be\\EPS.Utils.Service\\EPS.Utils.Service.csproj": {
+    "C:\\Users\\Admin\\Desktop\\at_smpservice-dev\\EPS.Utils.Service\\EPS.Utils.Service.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\tour_du_lich_be\\EPS.Utils.Service\\EPS.Utils.Service.csproj",
+        "projectUniqueName": "C:\\Users\\Admin\\Desktop\\at_smpservice-dev\\EPS.Utils.Service\\EPS.Utils.Service.csproj",
         "projectName": "EPS.Utils.Service",
-        "projectPath": "D:\\tour_du_lich_be\\EPS.Utils.Service\\EPS.Utils.Service.csproj",
+        "projectPath": "C:\\Users\\Admin\\Desktop\\at_smpservice-dev\\EPS.Utils.Service\\EPS.Utils.Service.csproj",
         "packagesPath": "C:\\Users\\Admin\\.nuget\\packages\\",
-        "outputPath": "D:\\tour_du_lich_be\\EPS.Utils.Service\\obj\\",
+        "outputPath": "C:\\Users\\Admin\\Desktop\\at_smpservice-dev\\EPS.Utils.Service\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -178,15 +174,14 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "netcoreapp3.1": {
             "targetAlias": "netcoreapp3.1",
             "projectReferences": {
-              "D:\\tour_du_lich_be\\EPS.Utils.Repository\\EPS.Utils.Repository.csproj": {
-                "projectPath": "D:\\tour_du_lich_be\\EPS.Utils.Repository\\EPS.Utils.Repository.csproj"
+              "C:\\Users\\Admin\\Desktop\\at_smpservice-dev\\EPS.Utils.Repository\\EPS.Utils.Repository.csproj": {
+                "projectPath": "C:\\Users\\Admin\\Desktop\\at_smpservice-dev\\EPS.Utils.Repository\\EPS.Utils.Repository.csproj"
               }
             }
           }
@@ -216,8 +211,7 @@
             "net47",
             "net471",
             "net472",
-            "net48",
-            "net481"
+            "net48"
           ],
           "assetTargetFallback": true,
           "warn": true,
@@ -226,7 +220,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.203\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.406\\RuntimeIdentifierGraph.json"
         }
       }
     }

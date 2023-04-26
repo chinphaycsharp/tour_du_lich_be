@@ -25,6 +25,7 @@ namespace EPS.API.Controllers
             _tourService = tourService;
         }
 
+        #region tour
         [CustomAuthorize(PrivilegeList.ViewTour, PrivilegeList.ManageTour)]
         [HttpGet]
         public async Task<IActionResult> GetListTours([FromQuery] TourGridPagingDto pagingModel)
@@ -122,5 +123,9 @@ namespace EPS.API.Controllers
                 return result;
             }
         }
+        #endregion
+
+        #region image_tours
+        #endregion
     }
 }
