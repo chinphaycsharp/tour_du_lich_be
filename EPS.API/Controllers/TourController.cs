@@ -45,14 +45,21 @@ namespace EPS.API.Controllers
         public async Task<ApiResult<int>> CreateTour([FromForm] TourCreateViewModel dto)
         {
             ApiResult<int> result = new ApiResult<int>();
-            int files = Request.Form.Files.Count;
-            TourCreateDto tourDto = new TourCreateDto(dto.category_id, dto.name, dto.url);
+            TourCreateDto tourDto = new TourCreateDto(dto.category_id, dto.name, dto.url, Request.Form.Files[0].FileName);
             tourDto.created_time = DateTime.Now;
+            if (Request.Form.Files.Count > 0)
+            {
+                var path = Path.Combine(_webHostEnvironment.WebRootPath, "uploads", Request.Form.Files[0].FileName);
+                using (var fileSteam = new FileStream(path, FileMode.Create))
+                {
+                    await Request.Form.Files[0].CopyToAsync(fileSteam);
+                }
+            }
             var id = await _tourService.CreateTours(tourDto);
             if (id == 0)
             {
                 var lastId = await _tourService.GetLastTourRecord();
-                DetailTourCreateDto detail = new DetailTourCreateDto(lastId, dto.price, dto.infor, dto.intro, Request.Form.Files[0].FileName, dto.schedule, dto.policy, dto.note);
+                DetailTourCreateDto detail = new DetailTourCreateDto(lastId, dto.price, dto.infor, dto.intro, dto.schedule, dto.policy, dto.note);
                 var checkDetail = await _tourService.CreateDetailTour(detail);
                 if (checkDetail == 0)
                 {
@@ -105,14 +112,21 @@ namespace EPS.API.Controllers
         public async Task<ApiResult<int>> UpdateTour(int id, [FromForm] TourUpdateViewModel dto)
         {
             ApiResult<int> result = new ApiResult<int>();
-            int files = Request.Form.Files.Count;
-            TourUpdateDto tourDto = new TourUpdateDto(dto.category_id, dto.name, dto.url);
+            TourUpdateDto tourDto = new TourUpdateDto(dto.category_id, dto.name, dto.url, Request.Form.Files[0].FileName);
             tourDto.updated_time = DateTime.Now;
+            if(Request.Form.Files.Count > 0)
+            {
+                var path = Path.Combine(_webHostEnvironment.WebRootPath, "uploads", Request.Form.Files[0].FileName);
+                using (var fileSteam = new FileStream(path, FileMode.Create))
+                {
+                    await Request.Form.Files[0].CopyToAsync(fileSteam);
+                }
+            }
             var check = await _tourService.UpdateTours(id, tourDto);
             if (check == 1)
             {
                 var lastId = await _tourService.GetDetailTourById(id);
-                DetailTourUpdateDto detail = new DetailTourUpdateDto(id, dto.price, dto.infor, dto.intro, Request.Form.Files[0].FileName, dto.schedule, dto.policy, dto.note);
+                DetailTourUpdateDto detail = new DetailTourUpdateDto(id, dto.price, dto.infor, dto.intro, dto.schedule, dto.policy, dto.note);
                 var checkDetail = await _tourService.UpdateDetailTourById(lastId, detail);
                 if(checkDetail == 1)
                 {

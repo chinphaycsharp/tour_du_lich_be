@@ -1,5 +1,6 @@
 ﻿using EPS.API.Commons;
 using EPS.API.Helpers;
+using EPS.API.Models.Statistical;
 using EPS.Data.Entities;
 using EPS.Service;
 using EPS.Service.Dtos.Privilege;
@@ -130,6 +131,31 @@ namespace EPS.API.Controllers
         public async Task<IActionResult> GetContainPrivilegeName(string name, int id)
         {
             return Ok(await _lookupService.GetContainPrivilegeName(name, id));
+        }
+
+        [HttpGet("statistical")]
+        public async Task<ApiResult<StatisticalViewModel>> Statistical()
+        {
+            ApiResult<StatisticalViewModel> result = new ApiResult<StatisticalViewModel>();
+            var statistical = await _lookupService.Statistical();
+            if(statistical.Length > 0)
+            {
+                StatisticalViewModel model = new StatisticalViewModel();
+                model.totalRegister = statistical[0];
+                model.totalTour = statistical[1];
+                model.totalPrice = statistical[2];
+                result.ResultObj = model;
+                result.Message = "";
+                result.statusCode = 200;
+                return result;
+            }
+            else
+            {
+                result.ResultObj = new StatisticalViewModel();
+                result.Message = "Đã có lỗi xẩy ra với hệ thống, vui lòng thử lại !";
+                result.statusCode = 500;
+                return result;
+            }
         }
     }
 }

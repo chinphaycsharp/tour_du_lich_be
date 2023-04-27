@@ -12,13 +12,14 @@ namespace EPS.Service.Dtos.Tour
         public string url { get; set; }
         public DateTime created_time { get; set; }
         public int status { get; set; }
-
-        public TourCreateDto(int CategoryId, string Name, string Url)
+        public string background_image { get; set; }
+        public TourCreateDto(int CategoryId, string Name, string Url, string BackgroundImage)
         {
             category_id = CategoryId;
             name = Name;
             url = Url;
             status = 1;
+            background_image = BackgroundImage;
         }
     }
 }

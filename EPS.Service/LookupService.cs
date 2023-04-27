@@ -2,8 +2,11 @@
 using EPS.Data;
 using EPS.Data.Entities;
 using EPS.Service.Dtos.Common;
+using EPS.Service.Dtos.Common.RegisterTour;
 using EPS.Service.Dtos.Privilege;
 using EPS.Service.Dtos.RolePrivilege;
+using EPS.Service.Dtos.Tour;
+using EPS.Service.Dtos.TourDetail;
 using EPS.Service.Helpers;
 using EPS.Utils.Service;
 using Microsoft.EntityFrameworkCore;
@@ -103,6 +106,18 @@ namespace EPS.Service
             }
 
             return privilegeGridDtos.Where(x => x != null).ToList();
+        }
+
+        public async Task<string[]> Statistical()
+        {
+            string[] result = new string[3];
+            var totalRegister = await _baseService.All<register_tour, RegisterTourGridDto>().CountAsync();
+            var totalTour = await _baseService.All<tour, TourGridDto>().CountAsync();
+            var totalPrice = await _baseService.All<v_detail_tour_register, DetailTourGridDto>().SumAsync(x => Convert.ToInt32(x.price));
+            result[0] = totalRegister.ToString();
+            result[1] = totalTour.ToString();
+            result[2] = totalPrice.ToString();
+            return result;
         }
     }
 }

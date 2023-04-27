@@ -22,6 +22,7 @@ namespace EPS.Data.Entities
         public virtual category category { get; set; }
         public string name { get; set; }
         public string url { get; set; }
+        public string background_image { get; set; }
         public DateTime created_time { get; set; }
         public DateTime updated_time { get; set; }
         public int status { get; set; }

@@ -86,7 +86,6 @@ namespace EPS.Service
                 detailtour.id_tour = tourId;
                 detailtour.price = dto.price;
                 detailtour.infor = dto.infor;
-                detailtour.background_image = dto.background_image;
                 detailtour.schedule = dto.schedule;
                 detailtour.policy = dto.policy;
                 detailtour.note = dto.note;
