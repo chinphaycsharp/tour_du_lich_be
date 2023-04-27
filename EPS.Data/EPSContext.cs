@@ -30,12 +30,12 @@ namespace EPS.Data
         public virtual DbSet<Log> Logs { get; set; }
         public virtual DbSet<category> categories { get; set; }
         public virtual DbSet<hotel> hotels { get; set; }
-        //public virtual DbSet<tour> tours { get; set; }
-        //public virtual DbSet<detail_tour> detail_tours { get; set; }
-        //public virtual DbSet<tour_connect_hotel> tour_connect_hotels { get; set; }
-        //public virtual DbSet<evaluate_tour> evaluate_tours { get; set; }
-        //public virtual DbSet<register_tour> register_tours { get; set; }
-        //public virtual DbSet<image_tour> image_tours { get; set; }
+        public virtual DbSet<tour> tours { get; set; }
+        public virtual DbSet<detail_tour> detail_tours { get; set; }
+        public virtual DbSet<tour_connect_hotel> tour_connect_hotels { get; set; }
+        public virtual DbSet<evaluate_tour> evaluate_tours { get; set; }
+        public virtual DbSet<register_tour> register_tours { get; set; }
+        public virtual DbSet<image_tour> image_tours { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

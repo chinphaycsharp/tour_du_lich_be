@@ -61,7 +61,7 @@ namespace EPS.API.Helpers
             context.Response.ContentType = "application/json";
             context.Response.StatusCode = (int)code;
 
-            logger.LogError(exception, "Unexpected error occurred. {errMsg}", exception.Message);
+            //logger.LogError(exception, "Unexpected error occurred. {errMsg}", exception.Message);
 
             return context.Response.WriteAsync(result);
         }

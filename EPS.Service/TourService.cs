@@ -4,10 +4,12 @@ using EPS.Data.Entities;
 using EPS.Service.Dtos.Common;
 using EPS.Service.Dtos.Privilege;
 using EPS.Service.Dtos.Tour;
+using EPS.Service.Dtos.TourDetail;
 using EPS.Service.Helpers;
 using EPS.Utils.Service;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace EPS.Service
@@ -30,9 +32,27 @@ namespace EPS.Service
             return await _baseService.FilterPagedAsync<tour, TourGridDto>(dto);
         }
 
+        public async Task<int> GetLastTourRecord()
+        {
+            var id = await _repository.Filter<tour>(x => x.id > 0).Select(x => x.id).MaxAsync();
+            return id;
+        }
+
+        public async Task<int> GetDetailTourById(int Tourid)
+        {
+            var id = await _repository.Filter<detail_tour>(x => x.id_tour == Tourid).Select(x=>x.id).FirstOrDefaultAsync();
+            return id;
+        }
+
         public async Task<int> CreateTours(TourCreateDto dto, bool isExploiting = false)
         {
             await _baseService.CreateAsync<tour, TourCreateDto>(dto);
+            return dto.id;
+        }
+        //
+        public async Task<int> CreateDetailTour(DetailTourCreateDto dto, bool isExploiting = false)
+        {
+            await _baseService.CreateAsync<detail_tour, DetailTourCreateDto>(dto);
             return dto.id;
         }
 
@@ -46,9 +66,33 @@ namespace EPS.Service
             return await _baseService.UpdateAsync<tour, TourUpdateDto>(id, dto);
         }
 
+        public async Task<int> UpdateDetailTourById(int id, DetailTourUpdateDto dto)
+        {
+            return await _baseService.UpdateAsync<detail_tour, DetailTourUpdateDto>(id, dto);
+        }
+
         public async Task<TourDetailDto> GetTourById(int id)
         {
             return await _baseService.FindAsync<tour, TourDetailDto>(id);
+        }
+
+        public async Task<DetailTourDetailDto> GetTourDetailById(int tourId)
+        {
+            var detailtour = await _repository.Filter<detail_tour>(x=>x.id_tour == tourId).FirstOrDefaultAsync();
+            if(detailtour != null)
+            {
+                DetailTourDetailDto dto = new DetailTourDetailDto();
+                detailtour.id = dto.id;
+                detailtour.id_tour = tourId;
+                detailtour.price = dto.price;
+                detailtour.infor = dto.infor;
+                detailtour.background_image = dto.background_image;
+                detailtour.schedule = dto.schedule;
+                detailtour.policy = dto.policy;
+                detailtour.note = dto.note;
+                return dto;
+            }
+            return new DetailTourDetailDto();
         }
     }
 }

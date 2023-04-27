@@ -19,7 +19,7 @@ namespace EPS.Data
             {
                 var context = serviceScope.ServiceProvider.GetService<EPSContext>();
 
-                context.Database.Migrate();
+                //context.Database.Migrate();
 
                 if (!context.IdentityClients.Any())
                 {

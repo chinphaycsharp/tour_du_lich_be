@@ -81,12 +81,19 @@ namespace EPS.API
             services.Configure<SMTPConfigModel>(Configuration.GetSection("EmailConfiguration"));
             services.AddTransient(typeof(Lazy<>), typeof(Lazier<>));
             services.AddScoped(x => x.GetService<IHttpContextAccessor>().HttpContext.User);
+
+            //register service
             services.AddScoped<IUserIdentity<int>, UserIdentity>();
             services.AddScoped<EPSRepository>();
             services.AddScoped<EPSBaseService>();
             services.AddScoped<AuthorizationService>();
             services.AddScoped<LookupService>();
             services.AddScoped<EmailService>();
+            services.AddScoped<ImageTourService>();
+            services.AddScoped<TourService>();
+            services.AddScoped<CategoryService>();
+            services.AddScoped<RegisterTourService>();
+            services.AddScoped<EvaluateTourService>();
             ConfigureJwtAuthService(services);
 
             services.AddMvc(x => x.EnableEndpointRouting = false).SetCompatibilityVersion(CompatibilityVersion.Version_3_0).AddNewtonsoftJson();
@@ -138,8 +145,8 @@ namespace EPS.API
             app.UseStaticFiles();
             app.UseMvc();
 
-            // cai nay chay lan dau tien thoi, nhung lan sau comment no lai
-            //DbInitializer.Initialize(app.ApplicationServices);
+            // init data db fisrt run
+            DbInitializer.Initialize(app.ApplicationServices);
         }
 
         public void ConfigureJwtAuthService(IServiceCollection services)
@@ -181,11 +188,8 @@ namespace EPS.API
                 //o.Audience = "";
                 o.TokenValidationParameters = tokenValidationParameters;
             });
-
-
         }
     }
-
 
     public class Lazier<T> : Lazy<T> where T : class
     {

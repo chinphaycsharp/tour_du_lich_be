@@ -14,8 +14,6 @@ namespace EPS.Data.Entities
         [InverseProperty("image_tours")]
         public virtual tour tour { get; set; }
         public string img_src { get; set; }
-        public DateTime created_time { get; set; }
-        public DateTime updated_time { get; set; }
         public int status { get; set; }
     }
 }
