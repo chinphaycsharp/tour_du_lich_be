@@ -1,24 +1,21 @@
-﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using EPS.API.Commons;
 using EPS.API.Helpers;
 using EPS.Data.Entities;
-using EPS.Service.Dtos.User;
 using EPS.Service;
-using System.Collections.Generic;
-using EPS.API.Commons;
-using ClosedXML.Excel;
-using System.IO;
+using EPS.Service.Dtos.User;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
-using System.Data;
-using System.Reflection;
-using OfficeOpenXml;
-using OfficeOpenXml.Table;
-using OfficeOpenXml.Style;
-using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
+using OfficeOpenXml;
+using OfficeOpenXml.Style;
+using OfficeOpenXml.Table;
+using System;
+using System.Collections.Generic;
+using System.Data;
+using System.IO;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace EPS.API.Controllers
 {
@@ -38,7 +35,7 @@ namespace EPS.API.Controllers
 
         [CustomAuthorize(PrivilegeList.ViewUser)]
         [HttpGet("list")]
-        public async Task<IActionResult> GetUsers([FromQuery]UserGridPagingDto pagingModel)
+        public async Task<IActionResult> GetUsers([FromQuery] UserGridPagingDto pagingModel)
         {
             return Ok(await _authorizationService.GetUsers(pagingModel));
         }
@@ -78,7 +75,7 @@ namespace EPS.API.Controllers
             var rowEnd = data.Count + 2;
             var tbl = worksheet.Tables.Add(new ExcelAddressBase(fromRow: 2, fromCol: 1, toRow: rowEnd, toColumn: 5), "Applicant");
             tbl.ShowHeader = true;
-            tbl.TableStyle = TableStyles.Dark9; 
+            tbl.TableStyle = TableStyles.Dark9;
             tbl.ShowTotal = true;
             worksheet.Cells[rowEnd, 3].Style.Numberformat.Format = numberformat;
 
@@ -116,7 +113,7 @@ namespace EPS.API.Controllers
         {
             ApiResult<int> result = new ApiResult<int>();
 
-            if(Request.Form.Files.Count > 0)
+            if (Request.Form.Files.Count > 0)
             {
                 var file = Request.Form.Files[0];
                 newUser.backgroundImage = "avartar//" + file.FileName;
@@ -175,7 +172,7 @@ namespace EPS.API.Controllers
                 editedUser.backgroundImage = editedUser.imageName;
             }
             editedUser.CreateDate = DateTime.Now;
-            var check = await _authorizationService.UpdateUser(id, editedUser,roleIds);
+            var check = await _authorizationService.UpdateUser(id, editedUser, roleIds);
             if (check)
             {
                 result.ResultObj = check;
@@ -310,7 +307,7 @@ namespace EPS.API.Controllers
         {
             {
                 ApiResult<bool> result = new ApiResult<bool>();
-                var check = await _authorizationService.ChangePassword( UserIdentity.Username, model);
+                var check = await _authorizationService.ChangePassword(UserIdentity.Username, model);
                 if (check)
                 {
                     result.ResultObj = check;

@@ -12,7 +12,8 @@ namespace EPS.Service.Profiles
     {
         public RegisterTourProfileDtoToEntity()
         {
-
+            CreateMap<RegisterTourCreateDto, register_tour>();
+            CreateMap<RegisterTourUpdateDto, register_tour>();
         }
     }
 
@@ -21,6 +22,7 @@ namespace EPS.Service.Profiles
         public RegisterTourProfileEntityToDto()
         {
             CreateMap<register_tour, RegisterTourGridDto>();
+            CreateMap<register_tour, RegisterTourDetailDto>();
             CreateMap<v_detail_tour_register, DetailTourGridDto>();
         }
     }

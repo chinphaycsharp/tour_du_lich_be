@@ -49,7 +49,7 @@ namespace EPS.Service
             await _baseService.CreateAsync<tour, TourCreateDto>(dto);
             return dto.id;
         }
-        //
+        
         public async Task<int> CreateDetailTour(DetailTourCreateDto dto, bool isExploiting = false)
         {
             await _baseService.CreateAsync<detail_tour, DetailTourCreateDto>(dto);

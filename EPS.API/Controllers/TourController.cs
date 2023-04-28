@@ -4,6 +4,7 @@ using EPS.API.Models.ImageTour;
 using EPS.API.Models.Tour;
 using EPS.Data.Entities;
 using EPS.Service;
+using EPS.Service.Dtos.Common.RegisterTour;
 using EPS.Service.Dtos.ImageTour;
 using EPS.Service.Dtos.Tour;
 using EPS.Service.Dtos.TourDetail;
@@ -23,12 +24,14 @@ namespace EPS.API.Controllers
     {
         private TourService _tourService;
         private ImageTourService _imageTourService;
+        private RegisterTourService _registerTourService;
         private IWebHostEnvironment _webHostEnvironment;
 
-        public TourController(TourService tourService, ImageTourService imageTourService, IWebHostEnvironment webHostEnvironment)
+        public TourController(TourService tourService, ImageTourService imageTourService, RegisterTourService registerTourService, IWebHostEnvironment webHostEnvironment)
         {
             _tourService = tourService;
             _imageTourService = imageTourService;
+            _registerTourService = registerTourService;
             _webHostEnvironment = webHostEnvironment;
         }
 
@@ -243,6 +246,37 @@ namespace EPS.API.Controllers
             else
             {
                 result.ResultObj = isSuccess;
+                result.Message = "Đã có lỗi xẩy ra với hệ thống, vui lòng thử lại !";
+                result.statusCode = 500;
+                return result;
+            }
+        }
+        #endregion
+
+        #region register_tours
+        [CustomAuthorize(PrivilegeList.ViewTour, PrivilegeList.ManageTour)]
+        [HttpGet("getregistertours")]
+        public async Task<IActionResult> GetListRegisterTours([FromQuery] RegisterTourGridPagingDto pagingModel)
+        {
+            return Ok(await _registerTourService.GetRegisterTours(pagingModel));
+        }
+
+        [CustomAuthorize(PrivilegeList.ManageTour)]
+        [HttpDelete("registertour/{id}")]
+        public async Task<ApiResult<int>> DeleteRegisterTour(int id)
+        {
+            ApiResult<int> result = new ApiResult<int>();
+            var check = await _registerTourService.DeleteRegisterTour(id);
+            if (check == 1)
+            {
+                result.ResultObj = check;
+                result.Message = "Xóa bản ghi thành công !";
+                result.statusCode = 200;
+                return result;
+            }
+            else
+            {
+                result.ResultObj = check;
                 result.Message = "Đã có lỗi xẩy ra với hệ thống, vui lòng thử lại !";
                 result.statusCode = 500;
                 return result;
