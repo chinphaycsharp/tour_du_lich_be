@@ -12,6 +12,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using System;
+using System.Globalization;
 using System.IO;
 using System.Threading.Tasks;
 
@@ -157,47 +158,61 @@ namespace EPS.API.Controllers
 
         [CustomAuthorize(PrivilegeList.ManageTour)]
         [HttpGet("getbyid/{id}")]
-        public async Task<ApiResult<TourDetailDto>> GetTourById(int id)
+        public async Task<ApiResult<TourDetailViewModel>> GetTourById(int id)
         {
-            ApiResult<TourDetailDto> result = new ApiResult<TourDetailDto>();
+            ApiResult<TourDetailViewModel> result = new ApiResult<TourDetailViewModel>();
             var dto = await _tourService.GetTourById(id);
             if (dto != null)
             {
-                result.ResultObj = dto;
-                result.Message = "";
-                result.statusCode = 200;
-                return result;
+                var tourDetail = await _tourService.GetTourDetailById(id);
+                if (tourDetail != null)
+                {
+                    var tourDetailViewModel = new TourDetailViewModel(dto.id, dto.category_id, dto.name, dto.url,
+                        dto.created_time.ToString("dd/M/yyyy", CultureInfo.InvariantCulture), dto.status, dto.background_image,
+                        tourDetail.price, tourDetail.infor, tourDetail.intro, tourDetail.schedule, tourDetail.policy, tourDetail.note);
+                    result.ResultObj = tourDetailViewModel;
+                    result.Message = "";
+                    result.statusCode = 200;
+                    return result;
+                }
+                else
+                {
+                    result.ResultObj = new TourDetailViewModel();
+                    result.Message = "Đã có lỗi xẩy ra với hệ thống, vui lòng thử lại !";
+                    result.statusCode = 500;
+                    return result;
+                }
             }
             else
             {
-                result.ResultObj = dto;
+                result.ResultObj = new TourDetailViewModel();
                 result.Message = "Đã có lỗi xẩy ra với hệ thống, vui lòng thử lại !";
                 result.statusCode = 500;
                 return result;
             }
         }
 
-        [CustomAuthorize(PrivilegeList.ManageTour)]
-        [HttpGet("getdetailtourbyid/{id}")]
-        public async Task<ApiResult<DetailTourDetailDto>> GetTourDetailById(int id)
-        {
-            ApiResult<DetailTourDetailDto> result = new ApiResult<DetailTourDetailDto>();
-            var dto = await _tourService.GetTourDetailById(id);
-            if (dto != null)
-            {
-                result.ResultObj = dto;
-                result.Message = "";
-                result.statusCode = 200;
-                return result;
-            }
-            else
-            {
-                result.ResultObj = dto;
-                result.Message = "Đã có lỗi xẩy ra với hệ thống, vui lòng thử lại !";
-                result.statusCode = 500;
-                return result;
-            }
-        }
+        //[CustomAuthorize(PrivilegeList.ManageTour)]
+        //[HttpGet("getdetailtourbyid/{id}")]
+        //public async Task<ApiResult<DetailTourDetailDto>> GetTourDetailById(int id)
+        //{
+        //    ApiResult<DetailTourDetailDto> result = new ApiResult<DetailTourDetailDto>();
+        //    var dto = await _tourService.GetTourDetailById(id);
+        //    if (dto != null)
+        //    {
+        //        result.ResultObj = dto;
+        //        result.Message = "";
+        //        result.statusCode = 200;
+        //        return result;
+        //    }
+        //    else
+        //    {
+        //        result.ResultObj = dto;
+        //        result.Message = "Đã có lỗi xẩy ra với hệ thống, vui lòng thử lại !";
+        //        result.statusCode = 500;
+        //        return result;
+        //    }
+        //}
         #endregion
 
         #region image_tours

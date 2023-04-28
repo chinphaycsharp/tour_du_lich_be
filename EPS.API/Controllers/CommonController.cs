@@ -10,6 +10,7 @@ using EPS.Service.Dtos.TourDetail;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using System;
+using System.Globalization;
 using System.IO;
 using System.Threading.Tasks;
 
@@ -21,11 +22,78 @@ namespace EPS.API.Controllers
     {
         private RegisterTourService _registerTourService;
         private EvaluateTourService _evaluateTourService;
-        public CommonController(RegisterTourService registerTourService, EvaluateTourService evaluateTourService)
+        private TourService _tourService;
+        public CommonController(RegisterTourService registerTourService, EvaluateTourService evaluateTourService, TourService tourService)
         {
             _registerTourService = registerTourService;
             _evaluateTourService = evaluateTourService;
+            _tourService = tourService;
         }
+
+        #region tours
+        [HttpGet("tours")]
+        public async Task<IActionResult> GetListTours([FromQuery] TourGridPagingDto pagingModel)
+        {
+            return Ok(await _tourService.GetTours(pagingModel));
+        }
+
+        [HttpGet("getbyid/{id}")]
+        public async Task<ApiResult<TourDetailViewModel>> GetTourById(int id)
+        {
+            ApiResult<TourDetailViewModel> result = new ApiResult<TourDetailViewModel>();
+            var dto = await _tourService.GetTourById(id);
+            if (dto != null)
+            {
+                var tourDetail = await _tourService.GetTourDetailById(id);
+                if (tourDetail != null)
+                {
+                    var tourDetailViewModel = new TourDetailViewModel(dto.id,dto.category_id,dto.name,dto.url,
+                        dto.created_time.ToString("dd/M/yyyy", CultureInfo.InvariantCulture),dto.status,dto.background_image,
+                        tourDetail.price,tourDetail.infor,tourDetail.intro,tourDetail.schedule,tourDetail.policy,tourDetail.note);
+                    result.ResultObj = tourDetailViewModel;
+                    result.Message = "";
+                    result.statusCode = 200;
+                    return result;
+                }
+                else
+                {
+                    result.ResultObj = new TourDetailViewModel();
+                    result.Message = "Đã có lỗi xẩy ra với hệ thống, vui lòng thử lại !";
+                    result.statusCode = 500;
+                    return result;
+                }
+            }
+            else
+            {
+                result.ResultObj = new TourDetailViewModel();
+                result.Message = "Đã có lỗi xẩy ra với hệ thống, vui lòng thử lại !";
+                result.statusCode = 500;
+                return result;
+            }
+        }
+
+        //[CustomAuthorize(PrivilegeList.ManageTour)]
+        //[HttpGet("getdetailtourbyid/{id}")]
+        //public async Task<ApiResult<DetailTourDetailDto>> GetTourDetailById(int id)
+        //{
+        //    ApiResult<DetailTourDetailDto> result = new ApiResult<DetailTourDetailDto>();
+        //    var dto = await _tourService.GetTourDetailById(id);
+        //    if (dto != null)
+        //    {
+        //        result.ResultObj = dto;
+        //        result.Message = "";
+        //        result.statusCode = 200;
+        //        return result;
+        //    }
+        //    else
+        //    {
+        //        result.ResultObj = dto;
+        //        result.Message = "Đã có lỗi xẩy ra với hệ thống, vui lòng thử lại !";
+        //        result.statusCode = 500;
+        //        return result;
+        //    }
+        //}
+        #endregion
 
         #region register_tours
         [HttpPost("resgistertour")]

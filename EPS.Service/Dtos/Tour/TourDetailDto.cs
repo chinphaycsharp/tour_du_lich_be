@@ -11,6 +11,7 @@ namespace EPS.Service.Dtos.Tour
         public string name { get; set; }
         public string url { get; set; }
         public DateTime created_time { get; set; }
+        public string background_image { get; set; }
         public string created_timeStr { get; set; }
         public DateTime updated_time { get; set; }
         public string updated_timeStr { get; set; }
