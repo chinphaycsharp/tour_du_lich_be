@@ -7,6 +7,8 @@ namespace EPS.Service.Dtos.Privilege
     public class PrivilegeUpdateDto
     {
         public string Id { get; set; }
+        public string Name { get; set; }
+        public string Description { get; set; }
         public bool? Status { get; set; }
     }
 }

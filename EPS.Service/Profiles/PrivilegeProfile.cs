@@ -9,6 +9,11 @@ namespace EPS.Service.Profiles
 {
     public class PrivilegeProfileDtoToEntity : Profile
     {
+        public PrivilegeProfileDtoToEntity()
+        {
+            CreateMap<PrivilegeCreateDto, Privilege>();
+            CreateMap<PrivilegeUpdateDto, Privilege>();
+        }
     }
 
     public class PrivilegeProfileEntityToDto : Profile

@@ -6,8 +6,13 @@ using System.Globalization;
 
 namespace EPS.Service.Profiles
 {
-    internal class CategoryProfileDtoToEntity : Profile
+    public class CategoryProfileDtoToEntity : Profile
     {
+        public CategoryProfileDtoToEntity()
+        {
+            CreateMap<CategoryCreateDto, category>();
+            CreateMap<CategoryUpdateDto, category>();
+        }
     }
 
     public class CategoryProfileEntityToDto : Profile

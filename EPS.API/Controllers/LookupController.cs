@@ -102,6 +102,7 @@ namespace EPS.API.Controllers
         public async Task<ApiResult<int>> UpdatePrivilege(string id, [FromForm] PrivilegeUpdateDto model)
         {
             ApiResult<int> result = new ApiResult<int>();
+            model.Status = true;
             var check = await _lookupService.UpdatePrivilege(id, model);
             if (check == 1)
             {
