@@ -97,3 +97,16 @@ D:\tour_du_lich_be\EPS.Utils.Repository\obj\Debug\netcoreapp3.1\EPS.Utils.Reposi
 D:\tour_du_lich_be\EPS.Utils.Repository\obj\Debug\netcoreapp3.1\EPS.Utils.Repository.csproj.CopyComplete
 D:\tour_du_lich_be\EPS.Utils.Repository\obj\Debug\netcoreapp3.1\EPS.Utils.Repository.dll
 D:\tour_du_lich_be\EPS.Utils.Repository\obj\Debug\netcoreapp3.1\EPS.Utils.Repository.pdb
+C:\Users\Admin\Desktop\tour_du_lich_be\EPS.Utils.Repository\bin\Debug\netcoreapp3.1\EPS.Utils.Repository.deps.json
+C:\Users\Admin\Desktop\tour_du_lich_be\EPS.Utils.Repository\bin\Debug\netcoreapp3.1\EPS.Utils.Repository.dll
+C:\Users\Admin\Desktop\tour_du_lich_be\EPS.Utils.Repository\bin\Debug\netcoreapp3.1\EPS.Utils.Repository.pdb
+C:\Users\Admin\Desktop\tour_du_lich_be\EPS.Utils.Repository\bin\Debug\netcoreapp3.1\EPS.Utils.Common.dll
+C:\Users\Admin\Desktop\tour_du_lich_be\EPS.Utils.Repository\bin\Debug\netcoreapp3.1\EPS.Utils.Common.pdb
+C:\Users\Admin\Desktop\tour_du_lich_be\EPS.Utils.Repository\obj\Debug\netcoreapp3.1\EPS.Utils.Repository.csproj.AssemblyReference.cache
+C:\Users\Admin\Desktop\tour_du_lich_be\EPS.Utils.Repository\obj\Debug\netcoreapp3.1\EPS.Utils.Repository.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Admin\Desktop\tour_du_lich_be\EPS.Utils.Repository\obj\Debug\netcoreapp3.1\EPS.Utils.Repository.AssemblyInfoInputs.cache
+C:\Users\Admin\Desktop\tour_du_lich_be\EPS.Utils.Repository\obj\Debug\netcoreapp3.1\EPS.Utils.Repository.AssemblyInfo.cs
+C:\Users\Admin\Desktop\tour_du_lich_be\EPS.Utils.Repository\obj\Debug\netcoreapp3.1\EPS.Utils.Repository.csproj.CoreCompileInputs.cache
+C:\Users\Admin\Desktop\tour_du_lich_be\EPS.Utils.Repository\obj\Debug\netcoreapp3.1\EPS.Utils.Repository.csproj.CopyComplete
+C:\Users\Admin\Desktop\tour_du_lich_be\EPS.Utils.Repository\obj\Debug\netcoreapp3.1\EPS.Utils.Repository.dll
+C:\Users\Admin\Desktop\tour_du_lich_be\EPS.Utils.Repository\obj\Debug\netcoreapp3.1\EPS.Utils.Repository.pdb

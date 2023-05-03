@@ -61,6 +61,11 @@ namespace EPS.Service
             return await _baseService.DeleteAsync<tour, int>(id);
         }
 
+        public async Task<int> DeleteDetailTours(int id)
+        {
+            return await _baseService.DeleteAsync<detail_tour, int>(id);
+        }
+
         public async Task<int> UpdateTours(int id, TourUpdateDto dto)
         {
             return await _baseService.UpdateAsync<tour, TourUpdateDto>(id, dto);

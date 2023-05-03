@@ -15,7 +15,7 @@ using System.Threading.Tasks;
 namespace EPS.API.Controllers
 {
     [Produces("application/json")]
-    [Route("api/roles")]
+    [Route("api/role")]
     [Authorize]
     public class RoleController : BaseController
     {

@@ -68,7 +68,7 @@ namespace EPS.API.Controllers
                 if (checkDetail == 0)
                 {
                     result.ResultObj = checkDetail;
-                    result.Message = "Cập nhập thành công !";
+                    result.Message = "Thêm mới thành công !";
                     result.statusCode = 200;
                     return result;
                 }
@@ -94,17 +94,35 @@ namespace EPS.API.Controllers
         public async Task<ApiResult<int>> DeleteTour(int id)
         {
             ApiResult<int> result = new ApiResult<int>();
-            var check = await _tourService.DeleteTours(id);
-            if (check == 1)
+            var lastId = await _tourService.GetDetailTourById(id);
+            if(lastId < 0)
             {
-                result.ResultObj = check;
-                result.Message = "Xóa bản ghi thành công !";
-                result.statusCode = 200;
-                return result;
+                result.ResultObj = default;
+                result.Message = "Đã có lỗi xẩy ra với hệ thống, vui lòng thử lại !";
+                result.statusCode = 500;
+            }
+            var checkdetails = await _tourService.DeleteDetailTours(lastId);
+            if (checkdetails == 1)
+            {
+                var check = await _tourService.DeleteTours(id);
+                if (check == 1)
+                {
+                    result.ResultObj = check;
+                    result.Message = "Xóa bản ghi thành công !";
+                    result.statusCode = 200;
+                    return result;
+                }
+                else
+                {
+                    result.ResultObj = check;
+                    result.Message = "Đã có lỗi xẩy ra với hệ thống, vui lòng thử lại !";
+                    result.statusCode = 500;
+                    return result;
+                }
             }
             else
             {
-                result.ResultObj = check;
+                result.ResultObj = default;
                 result.Message = "Đã có lỗi xẩy ra với hệ thống, vui lòng thử lại !";
                 result.statusCode = 500;
                 return result;
@@ -191,28 +209,6 @@ namespace EPS.API.Controllers
                 return result;
             }
         }
-
-        //[CustomAuthorize(PrivilegeList.ManageTour)]
-        //[HttpGet("getdetailtourbyid/{id}")]
-        //public async Task<ApiResult<DetailTourDetailDto>> GetTourDetailById(int id)
-        //{
-        //    ApiResult<DetailTourDetailDto> result = new ApiResult<DetailTourDetailDto>();
-        //    var dto = await _tourService.GetTourDetailById(id);
-        //    if (dto != null)
-        //    {
-        //        result.ResultObj = dto;
-        //        result.Message = "";
-        //        result.statusCode = 200;
-        //        return result;
-        //    }
-        //    else
-        //    {
-        //        result.ResultObj = dto;
-        //        result.Message = "Đã có lỗi xẩy ra với hệ thống, vui lòng thử lại !";
-        //        result.statusCode = 500;
-        //        return result;
-        //    }
-        //}
         #endregion
 
         #region image_tours

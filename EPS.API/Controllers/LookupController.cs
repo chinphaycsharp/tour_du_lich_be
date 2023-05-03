@@ -24,12 +24,6 @@ namespace EPS.API.Controllers
             _authorizationService = authorizationService;
         }
 
-        [HttpGet("roles")]
-        public async Task<IActionResult> GetRoles()
-        {
-            return Ok(await _lookupService.GetRoles());
-        }
-
         [HttpGet("privileges")]
         public async Task<IActionResult> GetPrivileges([FromQuery] PrivilegeGridPagingDto dto)
         {
@@ -37,7 +31,7 @@ namespace EPS.API.Controllers
         }
 
         [CustomAuthorize(PrivilegeList.ManageUser)]
-        [HttpPost]
+        [HttpPost("privileges")]
         public async Task<ApiResult<string>> CreatePrivilege([FromForm] PrivilegeCreateDto model)
         {
             ApiResult<string> result = new ApiResult<string>();
@@ -66,7 +60,7 @@ namespace EPS.API.Controllers
         }
 
         [CustomAuthorize(PrivilegeList.ManageUser)]
-        [HttpDelete("{id}")]
+        [HttpDelete("privileges/{id}")]
         public async Task<ApiResult<string>> DetelePrivilege(string id)
         {
             ApiResult<string> result = new ApiResult<string>();
@@ -98,7 +92,7 @@ namespace EPS.API.Controllers
         }
 
         [CustomAuthorize(PrivilegeList.ManageUser)]
-        [HttpPut("{id}")]
+        [HttpPut("privileges/{id}")]
         public async Task<ApiResult<int>> UpdatePrivilege(string id, [FromForm] PrivilegeUpdateDto model)
         {
             ApiResult<int> result = new ApiResult<int>();

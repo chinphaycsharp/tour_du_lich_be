@@ -36,7 +36,6 @@ namespace EPS.API.Controllers
         {
             dto.created_time = DateTime.Now;
             ApiResult<int> result = new ApiResult<int>();
-
             var id = await _categoryService.CreateCategory(dto);
             if (id == 0)
             {

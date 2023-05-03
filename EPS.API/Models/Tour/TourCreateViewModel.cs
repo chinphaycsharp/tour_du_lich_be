@@ -9,7 +9,6 @@ namespace EPS.API.Models.Tour
         public string url { get; set; }
         public DateTime updated_time { get; set; }
         public int status { get; set; }
-        public int id_tour { get; set; }
         public string price { get; set; }
         public string infor { get; set; }
         public string intro { get; set; }
