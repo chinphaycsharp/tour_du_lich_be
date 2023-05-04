@@ -8,15 +8,15 @@ namespace EPS.Service.Dtos.Tour
 {
     public class TourGridPagingDto : PagingParams<TourGridDto>
     {
-        public string FilterText { get; set; }
+        public string name { get; set; }
         public int id_category { get; set; }
         public override List<Expression<Func<TourGridDto, bool>>> GetPredicates()
         {
             var predicates = base.GetPredicates();
 
-            if (!string.IsNullOrEmpty(FilterText))
+            if (!string.IsNullOrEmpty(name))
             {
-                predicates.Add(x => x.name.Contains(FilterText));
+                predicates.Add(x => x.name.Contains(name));
             }
 
             if(id_category > 0)
