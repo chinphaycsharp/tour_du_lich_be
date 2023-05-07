@@ -71,7 +71,7 @@ namespace EPS.API
                 options.Password.RequiredUniqueChars = 3;
 
                 // Lockout settings
-                options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(30);
+                options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromHours(20);
                 options.Lockout.MaxFailedAccessAttempts = 10;
                 options.Lockout.AllowedForNewUsers = true;
 
@@ -118,7 +118,7 @@ namespace EPS.API
             services.AddCors(options =>
             {
                 options.AddPolicy("CorsPolicy", builder => builder
-                    .WithOrigins("http://localhost:4200", "http://localhost:60531", "http://localhost:4100", "http://localhost:5200")
+                    .WithOrigins("http://localhost:4200", "http://localhost:60531", "http://localhost:4100", "http://localhost:5200", "http://localhost:3000")
                     .AllowAnyMethod()
                     .AllowAnyHeader()
                     .AllowCredentials());

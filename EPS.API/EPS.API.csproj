@@ -39,6 +39,7 @@
     <ProjectReference Include="..\EPS.Data\EPS.Data.csproj" />
     <ProjectReference Include="..\EPS.Service\EPS.Service.csproj" />
     <ProjectReference Include="..\EPS.Utils.Common\EPS.Utils.Common.csproj" />
+    <ProjectReference Include="..\EPS.Utils.Service\EPS.Utils.Service.csproj" />
   </ItemGroup>
 
   <ItemGroup>

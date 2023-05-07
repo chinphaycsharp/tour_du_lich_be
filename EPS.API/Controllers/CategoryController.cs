@@ -17,10 +17,12 @@ namespace EPS.API.Controllers
     public class CategoryController : Controller
     {
         private CategoryService _categoryService;
+        private TourService _tourService;
 
-        public CategoryController(CategoryService categoryService)
+        public CategoryController(CategoryService categoryService, TourService tourService)
         {
             _categoryService = categoryService;
+            _tourService = tourService;
         }
 
         [CustomAuthorize(PrivilegeList.ViewCategory, PrivilegeList.ManageCategory)]
@@ -35,6 +37,7 @@ namespace EPS.API.Controllers
         public async Task<ApiResult<int>> CreateCategory([FromForm] CategoryCreateDto dto)
         {
             dto.created_time = DateTime.Now;
+            dto.status = 1;
             ApiResult<int> result = new ApiResult<int>();
             var id = await _categoryService.CreateCategory(dto);
             if (id == 0)
@@ -58,17 +61,28 @@ namespace EPS.API.Controllers
         public async Task<ApiResult<int>> DeleteCategory(int id)
         {
             ApiResult<int> result = new ApiResult<int>();
-            var check = await _categoryService.DeleteCategory(id);
-            if (check == 1)
+            var checkToursDelete = await _tourService.DeleteTourByCategoryId(id);
+            if(checkToursDelete == 1)
             {
-                result.ResultObj = check;
-                result.Message = "Xóa bản ghi thành công !";
-                result.statusCode = 200;
-                return result;
+                var check = await _categoryService.DeleteCategory(id);
+                if (check == 1)
+                {
+                    result.ResultObj = check;
+                    result.Message = "Xóa bản ghi thành công !";
+                    result.statusCode = 200;
+                    return result;
+                }
+                else
+                {
+                    result.ResultObj = check;
+                    result.Message = "Đã có lỗi xẩy ra với hệ thống, vui lòng thử lại !";
+                    result.statusCode = 500;
+                    return result;
+                }
             }
             else
             {
-                result.ResultObj = check;
+                result.ResultObj = default;
                 result.Message = "Đã có lỗi xẩy ra với hệ thống, vui lòng thử lại !";
                 result.statusCode = 500;
                 return result;
