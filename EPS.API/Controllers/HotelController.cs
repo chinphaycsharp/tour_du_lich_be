@@ -1,45 +1,43 @@
 ﻿using EPS.API.Commons;
 using EPS.API.Helpers;
 using EPS.Data.Entities;
-using EPS.Service.Dtos.Tour;
 using EPS.Service;
+using EPS.Service.Dtos.Category;
+using EPS.Service.Dtos.Hotel;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using System.Threading.Tasks;
 using System;
-using EPS.Service.Dtos.Category;
+using System.Threading.Tasks;
 
 namespace EPS.API.Controllers
 {
     [Produces("application/json")]
-    [Route("api/category")]
+    [Route("api/hotel")]
     [Authorize]
-    public class CategoryController : Controller
+    public class HotelController : BaseController
     {
-        private CategoryService _categoryService;
-        private TourService _tourService;
+        private HotelService _hotelService;
 
-        public CategoryController(CategoryService categoryService, TourService tourService)
+        public HotelController(HotelService hotelService)
         {
-            _categoryService = categoryService;
-            _tourService = tourService;
+            _hotelService = hotelService;
         }
 
-        [CustomAuthorize(PrivilegeList.ViewCategory, PrivilegeList.ManageCategory)]
+        [CustomAuthorize(PrivilegeList.ViewHotel, PrivilegeList.ManageHotel)]
         [HttpGet]
-        public async Task<IActionResult> GetListCategories([FromQuery] CategoryGridPagingDto pagingModel)
+        public async Task<IActionResult> GetListCategories([FromQuery] HotelPagingGridDto pagingModel)
         {
-            return Ok(await _categoryService.GetCategories(pagingModel));
+            return Ok(await _hotelService.GetCategories(pagingModel));
         }
 
-        [CustomAuthorize(PrivilegeList.ManageCategory)]
+        [CustomAuthorize(PrivilegeList.ManageHotel)]
         [HttpPost]
-        public async Task<ApiResult<int>> CreateCategory([FromForm] CategoryCreateDto dto)
+        public async Task<ApiResult<int>> CreateCategory([FromForm] HotelCreateDto dto)
         {
             dto.created_time = DateTime.Now;
             dto.status = 1;
             ApiResult<int> result = new ApiResult<int>();
-            var id = await _categoryService.CreateCategory(dto);
+            var id = await _hotelService.CreateHotel(dto);
             if (id == 0)
             {
                 result.ResultObj = id;
@@ -56,29 +54,18 @@ namespace EPS.API.Controllers
             }
         }
 
-        [CustomAuthorize(PrivilegeList.ManageCategory)]
+        [CustomAuthorize(PrivilegeList.ManageHotel)]
         [HttpDelete("{id}")]
         public async Task<ApiResult<int>> DeleteCategory(int id)
         {
             ApiResult<int> result = new ApiResult<int>();
-            var checkToursDelete = await _tourService.DeleteTourAndHotelByCategoryId(id);
-            if(checkToursDelete == 1)
+            var checkToursDelete = await _hotelService.DeleteHotel(id);
+            if (checkToursDelete == 1)
             {
-                var check = await _categoryService.DeleteCategory(id);
-                if (check == 1)
-                {
-                    result.ResultObj = check;
-                    result.Message = "Xóa bản ghi thành công !";
-                    result.statusCode = 200;
-                    return result;
-                }
-                else
-                {
-                    result.ResultObj = check;
-                    result.Message = "Đã có lỗi xẩy ra với hệ thống, vui lòng thử lại !";
-                    result.statusCode = 500;
-                    return result;
-                }
+                result.ResultObj = checkToursDelete;
+                result.Message = "Xóa bản ghi thành công !";
+                result.statusCode = 200;
+                return result;
             }
             else
             {
@@ -89,13 +76,13 @@ namespace EPS.API.Controllers
             }
         }
 
-        [CustomAuthorize(PrivilegeList.ManageCategory)]
+        [CustomAuthorize(PrivilegeList.ManageHotel)]
         [HttpPut("{id}")]
-        public async Task<ApiResult<int>> UpdateCategory(int id, [FromForm] CategoryUpdateDto dto)
+        public async Task<ApiResult<int>> UpdateCategory(int id, [FromForm] HotelUpdateDto dto)
         {
             ApiResult<int> result = new ApiResult<int>();
             dto.updated_time = DateTime.Now;
-            var check = await _categoryService.UpdateCategory(id, dto);
+            var check = await _hotelService.UpdateHotel(id, dto);
             if (check == 1)
             {
                 result.ResultObj = check;
@@ -112,12 +99,12 @@ namespace EPS.API.Controllers
             }
         }
 
-        [CustomAuthorize(PrivilegeList.ManageCategory)]
+        [CustomAuthorize(PrivilegeList.ManageHotel)]
         [HttpGet("getbyid/{id}")]
-        public async Task<ApiResult<CategoryDetailDto>> GetCategoryById(int id)
+        public async Task<ApiResult<HotelDetailDto>> GetCategoryById(int id)
         {
-            ApiResult<CategoryDetailDto> result = new ApiResult<CategoryDetailDto>();
-            var dto = await _categoryService.GetCategoryById(id);
+            ApiResult<HotelDetailDto> result = new ApiResult<HotelDetailDto>();
+            var dto = await _hotelService.GetHotelById(id);
             if (dto != null)
             {
                 result.ResultObj = dto;

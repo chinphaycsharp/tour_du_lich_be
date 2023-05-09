@@ -94,6 +94,7 @@ namespace EPS.API
             services.AddScoped<CategoryService>();
             services.AddScoped<RegisterTourService>();
             services.AddScoped<EvaluateTourService>();
+            services.AddScoped<HotelService>();
             ConfigureJwtAuthService(services);
 
             services.AddMvc(x => x.EnableEndpointRouting = false).SetCompatibilityVersion(CompatibilityVersion.Version_3_0).AddNewtonsoftJson();

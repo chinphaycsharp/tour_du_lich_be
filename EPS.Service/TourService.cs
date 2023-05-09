@@ -61,7 +61,7 @@ namespace EPS.Service
             return await _baseService.DeleteAsync<tour, int>(id);
         }
 
-        public async Task<int> DeleteTourByCategoryId(int id)
+        public async Task<int> DeleteTourAndHotelByCategoryId(int id)
         {
             int result = 0;
             var tours = await _repository.Filter<tour>(x => x.category_id == id).ToListAsync();
@@ -69,6 +69,12 @@ namespace EPS.Service
             {
                 result = 0;
                 result = await _baseService.DeleteAsync<tour, int>(item.id);
+            }
+            var hotels = await _repository.Filter<hotel>(x => x.category_id == id).ToListAsync();
+            foreach (var item in hotels)
+            {
+                result = 0;
+                result = await _baseService.DeleteAsync<hotel, int>(item.id);
             }
             return result;
         }

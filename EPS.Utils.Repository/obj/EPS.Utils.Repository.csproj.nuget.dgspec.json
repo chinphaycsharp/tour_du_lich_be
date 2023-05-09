@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Admin\\Desktop\\tour_du_lich_be\\EPS.Utils.Repository\\EPS.Utils.Repository.csproj": {}
+    "D:\\tour_du_lich_be\\EPS.Utils.Repository\\EPS.Utils.Repository.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Admin\\Desktop\\tour_du_lich_be\\EPS.Utils.Common\\EPS.Utils.Common.csproj": {
+    "D:\\tour_du_lich_be\\EPS.Utils.Common\\EPS.Utils.Common.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Admin\\Desktop\\tour_du_lich_be\\EPS.Utils.Common\\EPS.Utils.Common.csproj",
+        "projectUniqueName": "D:\\tour_du_lich_be\\EPS.Utils.Common\\EPS.Utils.Common.csproj",
         "projectName": "EPS.Utils.Common",
-        "projectPath": "C:\\Users\\Admin\\Desktop\\tour_du_lich_be\\EPS.Utils.Common\\EPS.Utils.Common.csproj",
+        "projectPath": "D:\\tour_du_lich_be\\EPS.Utils.Common\\EPS.Utils.Common.csproj",
         "packagesPath": "C:\\Users\\Admin\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Admin\\Desktop\\tour_du_lich_be\\EPS.Utils.Common\\obj\\",
+        "outputPath": "D:\\tour_du_lich_be\\EPS.Utils.Common\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -26,6 +26,7 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -55,7 +56,8 @@
             "net47",
             "net471",
             "net472",
-            "net48"
+            "net48",
+            "net481"
           ],
           "assetTargetFallback": true,
           "warn": true,
@@ -64,18 +66,18 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.406\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.203\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\Admin\\Desktop\\tour_du_lich_be\\EPS.Utils.Repository\\EPS.Utils.Repository.csproj": {
+    "D:\\tour_du_lich_be\\EPS.Utils.Repository\\EPS.Utils.Repository.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Admin\\Desktop\\tour_du_lich_be\\EPS.Utils.Repository\\EPS.Utils.Repository.csproj",
+        "projectUniqueName": "D:\\tour_du_lich_be\\EPS.Utils.Repository\\EPS.Utils.Repository.csproj",
         "projectName": "EPS.Utils.Repository",
-        "projectPath": "C:\\Users\\Admin\\Desktop\\tour_du_lich_be\\EPS.Utils.Repository\\EPS.Utils.Repository.csproj",
+        "projectPath": "D:\\tour_du_lich_be\\EPS.Utils.Repository\\EPS.Utils.Repository.csproj",
         "packagesPath": "C:\\Users\\Admin\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Admin\\Desktop\\tour_du_lich_be\\EPS.Utils.Repository\\obj\\",
+        "outputPath": "D:\\tour_du_lich_be\\EPS.Utils.Repository\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -90,14 +92,15 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "netcoreapp3.1": {
             "targetAlias": "netcoreapp3.1",
             "projectReferences": {
-              "C:\\Users\\Admin\\Desktop\\tour_du_lich_be\\EPS.Utils.Common\\EPS.Utils.Common.csproj": {
-                "projectPath": "C:\\Users\\Admin\\Desktop\\tour_du_lich_be\\EPS.Utils.Common\\EPS.Utils.Common.csproj"
+              "D:\\tour_du_lich_be\\EPS.Utils.Common\\EPS.Utils.Common.csproj": {
+                "projectPath": "D:\\tour_du_lich_be\\EPS.Utils.Common\\EPS.Utils.Common.csproj"
               }
             }
           }
@@ -139,7 +142,8 @@
             "net47",
             "net471",
             "net472",
-            "net48"
+            "net48",
+            "net481"
           ],
           "assetTargetFallback": true,
           "warn": true,
@@ -148,7 +152,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.406\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.203\\RuntimeIdentifierGraph.json"
         }
       }
     }
