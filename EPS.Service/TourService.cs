@@ -38,9 +38,9 @@ namespace EPS.Service
             return id;
         }
 
-        public async Task<int> GetDetailTourById(int Tourid)
+        public async Task<detail_tour> GetDetailTourById(int Tourid)
         {
-            var id = await _repository.Filter<detail_tour>(x => x.id_tour == Tourid).Select(x=>x.id).FirstOrDefaultAsync();
+            var id = await _repository.Filter<detail_tour>(x => x.id_tour == Tourid).FirstOrDefaultAsync();
             return id;
         }
 

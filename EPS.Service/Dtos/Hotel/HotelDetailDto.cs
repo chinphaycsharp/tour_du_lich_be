@@ -4,7 +4,7 @@ using System.Text;
 
 namespace EPS.Service.Dtos.Hotel
 {
-    public class HotelDetailGrid
+    public class HotelDetailDto
     {
         public int id { get; set; }
         public int category_id { get; set; }

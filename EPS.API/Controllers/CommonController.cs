@@ -1,17 +1,22 @@
-﻿using EPS.API.Commons;
+﻿using DocumentFormat.OpenXml.Drawing.Charts;
+using DocumentFormat.OpenXml.Spreadsheet;
+using EPS.API.Commons;
 using EPS.API.Helpers;
 using EPS.API.Models.Tour;
 using EPS.Data.Entities;
 using EPS.Service;
 using EPS.Service.Dtos.Common.EvaluateTour;
 using EPS.Service.Dtos.Common.RegisterTour;
+using EPS.Service.Dtos.Email;
 using EPS.Service.Dtos.Tour;
 using EPS.Service.Dtos.TourDetail;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using System;
+using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace EPS.API.Controllers
@@ -23,11 +28,15 @@ namespace EPS.API.Controllers
         private RegisterTourService _registerTourService;
         private EvaluateTourService _evaluateTourService;
         private TourService _tourService;
-        public CommonController(RegisterTourService registerTourService, EvaluateTourService evaluateTourService, TourService tourService)
+        private HotelService _hotelService;
+        private EmailService _emailService;
+        public CommonController(RegisterTourService registerTourService, EvaluateTourService evaluateTourService, TourService tourService, HotelService hotelService, EmailService emailService)
         {
             _registerTourService = registerTourService;
             _evaluateTourService = evaluateTourService;
             _tourService = tourService;
+            _hotelService = hotelService;
+            _emailService = emailService;
         }
 
         #region tours
@@ -105,6 +114,45 @@ namespace EPS.API.Controllers
             var id = await _registerTourService.CreateRegisterTour(dto);
             if (id == 0)
             {
+                var tour = await _tourService.GetTourById(dto.id_tour);
+                var detailTour = await _tourService.GetDetailTourById(dto.id_tour);
+                var hotels = await _hotelService.GetHotelByCategoryId(tour.category_id);
+                List<string> inforTour = new List<string>();
+                MatchCollection matches = Regex.Matches(detailTour.infor, @"<strong>.*?</strong>");
+                
+                // Use foreach-loop.
+                foreach (Match match in matches)
+                {
+                    foreach (Capture capture in match.Captures)
+                    {
+                        inforTour.Add(capture.Value);
+                    }
+                }
+                var x = inforTour[0] != null ? inforTour[0] : "";
+                string body = @"<p>Xin chào: " + dto.name_register + "</p>" +
+                                @"<p>Sau đây là thông tin của tour:</p>"+
+                                @"<p>Tên: " + tour.name + "</p>" +
+                                @"<p>Giá: " + detailTour.price + "</p>" +
+                                @"<p>" + inforTour[0] + " " + inforTour[1]  + "</p>" +
+                                @"<p>" + inforTour[2] + " " + inforTour[3] +"</p>" +
+                                @"<p>" + inforTour[4] + " " + inforTour[5] + "</p>" +
+                                @"<p>" + inforTour[6] + " " + inforTour[7] + "</p>";
+                UserEmailOptions options = new UserEmailOptions()
+                {
+                    ToEmails = dto.email_register,
+                    Subject = $"Thông tin Tour: " + tour.name
+                };
+
+                if (hotels.Count > 0)
+                {
+                    body = body + @"<p>Khách sạn: " + hotels[0].name + ", " + hotels[1].name + ", " + hotels[2].name + "</p>";
+                }
+                body = body + @"<p>Cảm ơn bạn đã tham khảo dịch vụ của chúng tôi. Chúng tôi sẽ liên hệ theo số điện thoại mà bạn cung cấp!!!</p>" +
+                                @"<p>Thân ái!!!</p>";
+
+                options.Body = body;
+
+                await _emailService.SendEmailForEmailConfirmation(options);
                 result.ResultObj = id;
                 result.Message = "Tạo mới thành công !";
                 result.statusCode = 201;

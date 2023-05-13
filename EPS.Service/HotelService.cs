@@ -3,6 +3,7 @@ using EPS.Data;
 using EPS.Data.Entities;
 using EPS.Service.Dtos.Category;
 using EPS.Service.Dtos.Hotel;
+using EPS.Service.Dtos.Tour;
 using EPS.Service.Helpers;
 using EPS.Utils.Service;
 using Microsoft.EntityFrameworkCore;
@@ -24,7 +25,12 @@ namespace EPS.Service
             _baseService = new EPSBaseService(repository, mapper);
         }
 
-        public async Task<List<hotel>> GetHotels(int category_id)
+        public async Task<PagingResult<HotelGridDto>> GetTours(HotelPagingGridDto dto)
+        {
+            return await _baseService.FilterPagedAsync<hotel, HotelGridDto>(dto);
+        }
+
+        public async Task<List<hotel>> GetHotelByCategoryId(int category_id)
         {
             return await _repository.Filter<hotel>(x => x.category_id == category_id).ToListAsync();
         }

@@ -79,7 +79,7 @@ namespace EPS.Service
                 UseDefaultCredentials = _smtpConfig.UseDefaultCredentials,
                 Credentials = networkCredential
             };
-            //smtpClient.UseDefaultCredentials = false;
+            //smtpClient.UseDefaultCredentials = true;
             mail.BodyEncoding = Encoding.Default;
 
 

@@ -94,14 +94,14 @@ namespace EPS.API.Controllers
         public async Task<ApiResult<int>> DeleteTour(int id)
         {
             ApiResult<int> result = new ApiResult<int>();
-            var lastId = await _tourService.GetDetailTourById(id);
-            if(lastId < 0)
+            var detailTour = await _tourService.GetDetailTourById(id);
+            if(detailTour.id_tour < 0)
             {
                 result.ResultObj = default;
                 result.Message = "Đã có lỗi xẩy ra với hệ thống, vui lòng thử lại !";
                 result.statusCode = 500;
             }
-            var checkdetails = await _tourService.DeleteDetailTours(lastId);
+            var checkdetails = await _tourService.DeleteDetailTours(id);
             if (checkdetails == 1)
             {
                 var check = await _tourService.DeleteTours(id);
@@ -147,9 +147,9 @@ namespace EPS.API.Controllers
             var check = await _tourService.UpdateTours(id, tourDto);
             if (check == 1)
             {
-                var lastId = await _tourService.GetDetailTourById(id);
+                var detailTour = await _tourService.GetDetailTourById(id);
                 DetailTourUpdateDto detail = new DetailTourUpdateDto(id, dto.price, dto.infor, dto.intro, dto.schedule, dto.policy, dto.note);
-                var checkDetail = await _tourService.UpdateDetailTourById(lastId, detail);
+                var checkDetail = await _tourService.UpdateDetailTourById(detailTour.id_tour, detail);
                 if(checkDetail == 1)
                 {
                     result.ResultObj = check;
