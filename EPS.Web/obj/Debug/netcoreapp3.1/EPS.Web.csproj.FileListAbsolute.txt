@@ -30,7 +30,6 @@ D:\tour_du_lich_be\EPS.Web\bin\Debug\netcoreapp3.1\EPS.Web.runtimeconfig.json
 D:\tour_du_lich_be\EPS.Web\bin\Debug\netcoreapp3.1\EPS.Web.runtimeconfig.dev.json
 D:\tour_du_lich_be\EPS.Web\bin\Debug\netcoreapp3.1\EPS.Web.dll
 D:\tour_du_lich_be\EPS.Web\bin\Debug\netcoreapp3.1\EPS.Web.pdb
-D:\tour_du_lich_be\EPS.Web\obj\Debug\netcoreapp3.1\EPS.Web.csproj.AssemblyReference.cache
 D:\tour_du_lich_be\EPS.Web\obj\Debug\netcoreapp3.1\EPS.Web.GeneratedMSBuildEditorConfig.editorconfig
 D:\tour_du_lich_be\EPS.Web\obj\Debug\netcoreapp3.1\EPS.Web.AssemblyInfoInputs.cache
 D:\tour_du_lich_be\EPS.Web\obj\Debug\netcoreapp3.1\EPS.Web.AssemblyInfo.cs

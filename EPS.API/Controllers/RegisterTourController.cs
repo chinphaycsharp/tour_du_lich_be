@@ -2,44 +2,43 @@
 using EPS.API.Helpers;
 using EPS.Data.Entities;
 using EPS.Service;
-using EPS.Service.Dtos.Blog;
-using Microsoft.AspNetCore.Authorization;
+using EPS.Service.Dtos.Common.RegisterTour;
 using Microsoft.AspNetCore.Mvc;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace EPS.API.Controllers
 {
-    [Produces("application/json")]
-    [Route("api/blog")]
-    [Authorize]
-    public class BlogController : BaseController
+    public class RegisterTourController : BaseController
     {
-        private BlogService _blogService;
+        private RegisterTourService _registerTourService;
 
-        public BlogController(BlogService blogService)
+        public RegisterTourController(RegisterTourService registerTourService)
         {
-            _blogService = blogService;
+            _registerTourService = registerTourService;
         }
 
+        [CustomAuthorize(PrivilegeList.ManageTour)]
         [HttpGet]
-        public async Task<IActionResult> GetListCategories([FromQuery] BlogPagingGridDto pagingModel)
+        public async Task<IActionResult> GetListTours([FromQuery] RegisterTourGridPagingDto pagingModel)
         {
-            return Ok(await _blogService.GetBlog(pagingModel));
+            return Ok(await _registerTourService.GetRegisterTours(pagingModel));
         }
 
-        [CustomAuthorize(PrivilegeList.ManageBlog)]
+        [CustomAuthorize(PrivilegeList.ManageTour)]
         [HttpPost]
-        public async Task<ApiResult<int>> CreateBlog([FromForm] BlogCreateDto dto)
+        public async Task<ApiResult<int>> CreateTour([FromForm] RegisterTourCreateDto dto)
         {
-            dto.created_time = DateTime.Now;
             ApiResult<int> result = new ApiResult<int>();
-            var id = await _blogService.CreateBlog(dto);
+            dto.created_time = DateTime.Now;
+            var id = await _registerTourService.CreateRegisterTour(dto);
             if (id == 0)
             {
                 result.ResultObj = id;
-                result.Message = "Tạo mới thành công !";
-                result.statusCode = 201;
+                result.Message = "Thêm mới thành công !";
+                result.statusCode = 200;
                 return result;
             }
             else
@@ -51,15 +50,16 @@ namespace EPS.API.Controllers
             }
         }
 
-        [CustomAuthorize(PrivilegeList.ManageBlog)]
+        [CustomAuthorize(PrivilegeList.ManageTour)]
         [HttpDelete("{id}")]
-        public async Task<ApiResult<int>> DeleteBlog(int id)
+        public async Task<ApiResult<int>> DeleteTour(int id)
         {
             ApiResult<int> result = new ApiResult<int>();
-            var checkDelete = await _blogService.DeleteBlog(id);
-            if (checkDelete == 1)
+
+            var checkdetails = await _registerTourService.DeleteRegisterTour(id);
+            if (checkdetails == 1)
             {
-                result.ResultObj = checkDelete;
+                result.ResultObj = checkdetails;
                 result.Message = "Xóa bản ghi thành công !";
                 result.statusCode = 200;
                 return result;
@@ -73,13 +73,12 @@ namespace EPS.API.Controllers
             }
         }
 
-        [CustomAuthorize(PrivilegeList.ManageBlog)]
+        [CustomAuthorize(PrivilegeList.ManageTour)]
         [HttpPut("{id}")]
-        public async Task<ApiResult<int>> UpdateBlog(int id, [FromForm] BlogUpdateDto dto)
+        public async Task<ApiResult<int>> UpdateTour(int id, [FromForm] RegisterTourUpdateDto dto)
         {
             ApiResult<int> result = new ApiResult<int>();
-            dto.updated_time = DateTime.Now;
-            var check = await _blogService.UpdateBlog(id, dto);
+            var check = await _registerTourService.UpdateRegisterTour(id, dto);
             if (check == 1)
             {
                 result.ResultObj = check;
@@ -96,12 +95,12 @@ namespace EPS.API.Controllers
             }
         }
 
-        [CustomAuthorize(PrivilegeList.ManageBlog)]
+        [CustomAuthorize(PrivilegeList.ManageTour)]
         [HttpGet("getbyid/{id}")]
-        public async Task<ApiResult<BlogDetailRegexDto>> GetBlogById(int id)
+        public async Task<ApiResult<RegisterTourDetailDto>> GetTourById(int id)
         {
-            ApiResult<BlogDetailRegexDto> result = new ApiResult<BlogDetailRegexDto>();
-            var dto = await _blogService.GetBlogById(id);
+            ApiResult<RegisterTourDetailDto> result = new ApiResult<RegisterTourDetailDto>();
+            var dto = await _registerTourService.GetRegisterTourById(id);
             if (dto != null)
             {
                 result.ResultObj = dto;
@@ -111,7 +110,7 @@ namespace EPS.API.Controllers
             }
             else
             {
-                result.ResultObj = dto;
+                result.ResultObj = new RegisterTourDetailDto();
                 result.Message = "Đã có lỗi xẩy ra với hệ thống, vui lòng thử lại !";
                 result.statusCode = 500;
                 return result;

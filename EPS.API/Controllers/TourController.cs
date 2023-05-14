@@ -37,7 +37,7 @@ namespace EPS.API.Controllers
         }
 
         #region tour
-        [CustomAuthorize(PrivilegeList.ViewTour, PrivilegeList.ManageTour)]
+        [CustomAuthorize(PrivilegeList.ManageTour)]
         [HttpGet]
         public async Task<IActionResult> GetListTours([FromQuery] TourGridPagingDto pagingModel)
         {
@@ -46,7 +46,7 @@ namespace EPS.API.Controllers
 
         [CustomAuthorize(PrivilegeList.ManageTour)]
         [HttpPost]
-        public async Task<ApiResult<int>> CreateTour([FromForm] TourCreateViewModel dto)
+        public async Task<ApiResult<int>> CreateTour([FromForm] TourCreateViewModelDto dto)
         {
             ApiResult<int> result = new ApiResult<int>();
             TourCreateDto tourDto = new TourCreateDto(dto.category_id, dto.name, dto.url, Request.Form.Files[0].FileName);
@@ -63,7 +63,7 @@ namespace EPS.API.Controllers
             if (id == 0)
             {
                 var lastId = await _tourService.GetLastTourRecord();
-                DetailTourCreateDto detail = new DetailTourCreateDto(lastId, dto.price, dto.infor, dto.intro, dto.schedule, dto.policy, dto.note);
+                DetailTourCreateDto detail = new DetailTourCreateDto(lastId, dto.price, dto.infor, dto.intro, dto.schedule, dto.policy, dto.note, Request.Form.Files[0].FileName);
                 var checkDetail = await _tourService.CreateDetailTour(detail);
                 if (checkDetail == 0)
                 {
@@ -148,7 +148,7 @@ namespace EPS.API.Controllers
             if (check == 1)
             {
                 var detailTour = await _tourService.GetDetailTourById(id);
-                DetailTourUpdateDto detail = new DetailTourUpdateDto(id, dto.price, dto.infor, dto.intro, dto.schedule, dto.policy, dto.note);
+                DetailTourUpdateDto detail = new DetailTourUpdateDto(id, dto.price, dto.infor, dto.intro, dto.schedule, dto.policy, dto.note, Request.Form.Files[0].FileName);
                 var checkDetail = await _tourService.UpdateDetailTourById(detailTour.id_tour, detail);
                 if(checkDetail == 1)
                 {
@@ -212,7 +212,7 @@ namespace EPS.API.Controllers
         #endregion
 
         #region image_tours
-        [CustomAuthorize(PrivilegeList.ViewImage, PrivilegeList.ManageImage)]
+        [CustomAuthorize( PrivilegeList.ManageImage)]
         [HttpGet("imagetours")]
         public async Task<IActionResult> GetListImageTours([FromQuery] ImageTourGridPagingDto pagingModel)
         {
@@ -265,7 +265,7 @@ namespace EPS.API.Controllers
         #endregion
 
         #region register_tours
-        [CustomAuthorize(PrivilegeList.ViewTour, PrivilegeList.ManageTour)]
+        [CustomAuthorize(PrivilegeList.ManageTour)]
         [HttpGet("getregistertours")]
         public async Task<IActionResult> GetListRegisterTours([FromQuery] RegisterTourGridPagingDto pagingModel)
         {

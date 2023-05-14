@@ -16,5 +16,6 @@ namespace EPS.Data.Entities
         public string schedule { get; set; }
         public string policy { get; set; }
         public string note { get; set; }
+        public string background_image { get; set; }
     }
 }

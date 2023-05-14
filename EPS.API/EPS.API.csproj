@@ -43,7 +43,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="wwwroot\common\" />
+    <Folder Include="wwwroot\common\blog\" />
     <Folder Include="wwwroot\uploads\" />
   </ItemGroup>
 

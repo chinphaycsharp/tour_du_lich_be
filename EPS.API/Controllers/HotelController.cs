@@ -23,7 +23,7 @@ namespace EPS.API.Controllers
             _hotelService = hotelService;
         }
 
-        [CustomAuthorize(PrivilegeList.ViewHotel, PrivilegeList.ManageHotel)]
+        [CustomAuthorize( PrivilegeList.ManageHotel)]
         [HttpGet]
         public async Task<IActionResult> GetListCategories([FromQuery] HotelPagingGridDto pagingModel)
         {

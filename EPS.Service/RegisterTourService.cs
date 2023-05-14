@@ -30,10 +30,10 @@ namespace EPS.Service
             return await _baseService.FilterPagedAsync<register_tour, RegisterTourGridDto>(dto);
         }
 
-        public async Task<int> GetRegisterTourById(int Tourid)
+        public async Task<RegisterTourDetailDto> GetRegisterTourById(int id)
         {
-            var id = await _repository.Filter<register_tour>(x => x.id_tour == Tourid).Select(x => x.id).FirstOrDefaultAsync();
-            return id;
+            var dto = await  _baseService.FindAsync<blog, RegisterTourDetailDto>(id);
+            return dto;
         }
 
         public async Task<int> CreateRegisterTour(RegisterTourCreateDto dto, bool isExploiting = false)

@@ -4,7 +4,15 @@ using System.Text;
 
 namespace EPS.Service.Dtos.Blog
 {
-    internal class BlogGridDto
+     public class BlogGridDto
     {
+        public int id { get; set; }
+        public string title { get; set; }
+        public string img_src { get; set; }
+        public string content { get; set; }
+        public DateTime created_time { get; set; }
+        public DateTime updated_time { get; set; }
+        public string created_timeStr { get; set; }
+        public string updated_timeStr { get; set; }
     }
 }

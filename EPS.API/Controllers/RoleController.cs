@@ -27,7 +27,7 @@ namespace EPS.API.Controllers
         }
 
         //list all
-        [CustomAuthorize(PrivilegeList.ViewRole, PrivilegeList.ManageRole)]
+        [CustomAuthorize(PrivilegeList.ManageRole)]
         [HttpGet]
         public async Task<IActionResult> GetListRoles([FromQuery]RoleGridPagingDto pagingModel)
         {
@@ -35,7 +35,7 @@ namespace EPS.API.Controllers
         }
 
         //get privileges by roleId  
-        [CustomAuthorize(PrivilegeList.ViewRole, PrivilegeList.ManageRole)]
+        [CustomAuthorize(PrivilegeList.ManageRole)]
         [HttpGet("{id}/privileges")]
         public async Task<IActionResult> GetRolePrivieleges(int id)
         {
@@ -52,7 +52,7 @@ namespace EPS.API.Controllers
         }
 
         //detail
-        [CustomAuthorize(PrivilegeList.ViewRole, PrivilegeList.ManageRole)]
+        [CustomAuthorize( PrivilegeList.ManageRole)]
         [HttpGet("{id}")]
         public async Task<ApiResult<RoleDetailDto>> GetRoleById(int id)
         {

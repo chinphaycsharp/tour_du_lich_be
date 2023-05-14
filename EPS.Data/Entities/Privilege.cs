@@ -31,29 +31,19 @@ namespace EPS.Data.Entities
 
     public enum PrivilegeList
     {
-        [Description("Xem người dùng")]
-        ViewUser,
         [Description("Quản lý người dùng")]
         ManageUser,
-        [Description("Xem nhóm người dùng")]
-        ViewRole,
         [Description("Quản lý nhóm người dùng")]
         ManageRole,
-        [Description("Xem tour")]
-        ViewTour,
         [Description("Quản lý tour")]
         ManageTour,
-        [Description("Xem danh mục")]
-        ViewCategory,
         [Description("Quản lý tour mục")]
         ManageCategory,
-        [Description("Xem khách sạn")]
-        ViewHotel,
         [Description("Quản lý khách sạn")]
         ManageHotel,
-        [Description("Xem ảnh")]
-        ViewImage,
         [Description("Quản lý ảnh")]
-        ManageImage
+        ManageImage,
+        [Description("Quản lý blog")]
+        ManageBlog
     }
 }

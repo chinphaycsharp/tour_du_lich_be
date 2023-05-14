@@ -178,8 +178,45 @@ namespace EPS.API.Controllers
             var id = await _evaluateTourService.EvaluateTours(dto);
             if (id == 0)
             {
+
                 result.ResultObj = id;
                 result.Message = "Tạo mới thành công !";
+                result.statusCode = 201;
+                return result;
+            }
+            else
+            {
+                result.ResultObj = id;
+                result.Message = "Đã có lỗi xẩy ra với hệ thống, vui lòng thử lại !";
+                result.statusCode = 500;
+                return result;
+            }
+        }
+        #endregion
+
+        #region confirm_tour
+        [HttpPut("confirmtour/{id}")]
+        public async Task<ApiResult<int>> ConfirmTour(int id, [FromForm] RegisterTourUpdateDto dto)
+        {
+            ApiResult<int> result = new ApiResult<int>();
+
+            var check = await _registerTourService.UpdateRegisterTour(id, dto);
+            if (check == 1)
+            {
+                var tour = await _tourService.GetTourById(dto.id_tour);
+                UserEmailOptions options = new UserEmailOptions()
+                {
+                    ToEmails = dto.email_register,
+                    Subject = $"Thông tin Tour: " + tour.name,
+                    Body = @"<p>Xin chào: " + dto.name_register + "</p>" +
+                                @"<p>Bạn đã đăng ký tour:" + tour.name + " thành công!!!</p>" +
+                                @"<p>Cảm ơn bạn đã tham khảo dịch vụ của chúng tôi. Chúng tôi sẽ liên hệ theo số điện thoại mà bạn cung cấp!!!</p>" +
+                                @"<p>Thân ái!!!</p>"
+                };
+
+                await _emailService.SendEmailForEmailConfirmation(options);
+                result.ResultObj = id;
+                result.Message = "Xác nhận tour thành công !";
                 result.statusCode = 201;
                 return result;
             }

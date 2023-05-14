@@ -13,7 +13,8 @@ namespace EPS.Service.Dtos.TourDetail
         public string schedule { get; set; }
         public string policy { get; set; }
         public string note { get; set; }
-        public DetailTourUpdateDto(int IdTour, string Price, string Infor, string Intro, string Schedule, string Policy, string Note)
+        public string background_image { get; set; }
+        public DetailTourUpdateDto(int IdTour, string Price, string Infor, string Intro, string Schedule, string Policy, string Note, string Background_image)
         {
             id_tour = IdTour;
             price = Price;
@@ -22,6 +23,7 @@ namespace EPS.Service.Dtos.TourDetail
             schedule = Schedule;
             policy = Policy;
             note = Note;
+            background_image = Background_image;
         }
     }
 }

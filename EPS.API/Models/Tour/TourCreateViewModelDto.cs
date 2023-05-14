@@ -2,7 +2,7 @@
 
 namespace EPS.API.Models.Tour
 {
-    public class TourCreateViewModel
+    public class TourCreateViewModelDto
     {
         public int category_id { get; set; }
         public string name { get; set; }

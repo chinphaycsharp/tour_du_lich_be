@@ -14,7 +14,7 @@ namespace EPS.API.Controllers
     [Produces("application/json")]
     [Route("api/category")]
     [Authorize]
-    public class CategoryController : Controller
+    public class CategoryController : BaseController
     {
         private CategoryService _categoryService;
         private TourService _tourService;
@@ -25,7 +25,7 @@ namespace EPS.API.Controllers
             _tourService = tourService;
         }
 
-        [CustomAuthorize(PrivilegeList.ViewCategory, PrivilegeList.ManageCategory)]
+        [CustomAuthorize( PrivilegeList.ManageCategory)]
         [HttpGet]
         public async Task<IActionResult> GetListCategories([FromQuery] CategoryGridPagingDto pagingModel)
         {

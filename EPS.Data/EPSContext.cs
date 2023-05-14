@@ -37,6 +37,7 @@ namespace EPS.Data
         public virtual DbSet<register_tour> register_tours { get; set; }
         public virtual DbSet<image_tour> image_tours { get; set; }
         public virtual DbSet<blog> blogs { get; set; }
+        public virtual DbSet<image_blog> image_blogs { get; set; }
         public virtual DbSet<v_detail_tour_register> v_detail_tour_register { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -102,6 +103,10 @@ namespace EPS.Data
             .WithOne(ad => ad.tour)
             .HasForeignKey<detail_tour>(ad => ad.id_tour);
 
+            modelBuilder.Entity<image_blog>()
+            .HasOne<blog>(s => s.blog)
+            .WithMany(g => g.image_blogs)
+            .HasForeignKey(s => s.id_blog);
         }
     }
 }

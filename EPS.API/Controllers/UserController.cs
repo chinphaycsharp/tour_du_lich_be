@@ -33,7 +33,7 @@ namespace EPS.API.Controllers
             _webHostEnvironment = webHostEnvironment;
         }
 
-        [CustomAuthorize(PrivilegeList.ViewUser)]
+        [CustomAuthorize(PrivilegeList.ManageUser)]
         [HttpGet("list")]
         public async Task<IActionResult> GetUsers([FromQuery] UserGridPagingDto pagingModel)
         {
@@ -84,7 +84,7 @@ namespace EPS.API.Controllers
             return p;
         }
 
-        [CustomAuthorize(PrivilegeList.ViewUser)]
+        [CustomAuthorize(PrivilegeList.ManageUser)]
         [HttpGet("{id}")]
         public async Task<ApiResult<UserDetailDto>> GetUserById(int id)
         {
