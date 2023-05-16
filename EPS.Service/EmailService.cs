@@ -1,6 +1,5 @@
 ﻿using EPS.Service.Dtos.Email;
 using Microsoft.Extensions.Options;
-using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Net;

@@ -1,8 +1,12 @@
 ﻿using EPS.API.Commons;
 using EPS.API.Helpers;
+using EPS.API.Models.ImageBlog;
+using EPS.API.Models.ImageTour;
 using EPS.Data.Entities;
 using EPS.Service;
 using EPS.Service.Dtos.Blog;
+using EPS.Service.Dtos.ImageBlog;
+using EPS.Service.Dtos.ImageTour;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -18,11 +22,13 @@ namespace EPS.API.Controllers
     public class BlogController : BaseController
     {
         private BlogService _blogService;
+        private ImageService _imageService;
         private IWebHostEnvironment _webHostEnvironment;
-        public BlogController(BlogService blogService, IWebHostEnvironment webHostEnvironment)
+        public BlogController(BlogService blogService, IWebHostEnvironment webHostEnvironment, ImageService imageService)
         {
             _blogService = blogService;
             _webHostEnvironment = webHostEnvironment;
+            _imageService = imageService;
         }
 
         [HttpGet]
@@ -54,8 +60,6 @@ namespace EPS.API.Controllers
             var id = await _blogService.CreateBlog(dto);
             if (id == 0)
             {
-                var idblog = await _blogService.GetLastBlogRecord();
-                var contentBlog = await _blogService.CreateContentBlog(dto.content, idblog);
                 result.ResultObj = id;
                 result.Message = "Tạo mới thành công !";
                 result.statusCode = 201;
@@ -137,5 +141,57 @@ namespace EPS.API.Controllers
             }
         }
 
+        #region image_tours
+        [CustomAuthorize(PrivilegeList.ManageImage)]
+        [HttpGet("imagetours")]
+        public async Task<IActionResult> GetListImageBlogs([FromQuery] ImageBlogGridPagingDto pagingModel)
+        {
+            return Ok(await _imageService.GetImageBlogs(pagingModel));
+        }
+
+        [CustomAuthorize(PrivilegeList.ManageTour)]
+        [HttpPost("imagetours")]
+        public async Task<ApiResult<bool>> CreateImageBlog([FromForm] ImageBlogViewModel dto)
+        {
+            ApiResult<bool> result = new ApiResult<bool>();
+            bool isSuccess = true;
+            if (Request.Form.Files.Count > 0)
+            {
+                foreach (var item in Request.Form.Files)
+                {
+                    dto.img_src = item.FileName;
+                    try
+                    {
+                        var path = Path.Combine(_webHostEnvironment.WebRootPath, "uploads", item.FileName);
+                        ImageBlogCreateDto imagetour = new ImageBlogCreateDto(dto.id_blog, item.FileName);
+                        var id = await _imageService.CreateImageBlogs(imagetour);
+                        using (var fileSteam = new FileStream(path, FileMode.Create))
+                        {
+                            await item.CopyToAsync(fileSteam);
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        isSuccess = false;
+                    }
+                }
+            }
+
+            if (isSuccess == true)
+            {
+                result.ResultObj = isSuccess;
+                result.Message = "Tạo mới thành công !";
+                result.statusCode = 201;
+                return result;
+            }
+            else
+            {
+                result.ResultObj = isSuccess;
+                result.Message = "Đã có lỗi xẩy ra với hệ thống, vui lòng thử lại !";
+                result.statusCode = 500;
+                return result;
+            }
+        }
+        #endregion
     }
 }

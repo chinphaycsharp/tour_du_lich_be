@@ -24,11 +24,11 @@ namespace EPS.API.Controllers
     public class TourController : BaseController
     {
         private TourService _tourService;
-        private ImageTourService _imageTourService;
+        private ImageService _imageTourService;
         private RegisterTourService _registerTourService;
         private IWebHostEnvironment _webHostEnvironment;
 
-        public TourController(TourService tourService, ImageTourService imageTourService, RegisterTourService registerTourService, IWebHostEnvironment webHostEnvironment)
+        public TourController(TourService tourService, ImageService imageTourService, RegisterTourService registerTourService, IWebHostEnvironment webHostEnvironment)
         {
             _tourService = tourService;
             _imageTourService = imageTourService;

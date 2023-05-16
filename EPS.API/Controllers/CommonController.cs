@@ -1,21 +1,16 @@
-﻿using DocumentFormat.OpenXml.Drawing.Charts;
-using DocumentFormat.OpenXml.Spreadsheet;
-using EPS.API.Commons;
+﻿using EPS.API.Commons;
 using EPS.API.Helpers;
 using EPS.API.Models.Tour;
-using EPS.Data.Entities;
 using EPS.Service;
 using EPS.Service.Dtos.Common.EvaluateTour;
 using EPS.Service.Dtos.Common.RegisterTour;
+using EPS.Service.Dtos.Contact;
 using EPS.Service.Dtos.Email;
 using EPS.Service.Dtos.Tour;
-using EPS.Service.Dtos.TourDetail;
-using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
-using System.IO;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
@@ -30,13 +25,15 @@ namespace EPS.API.Controllers
         private TourService _tourService;
         private HotelService _hotelService;
         private EmailService _emailService;
-        public CommonController(RegisterTourService registerTourService, EvaluateTourService evaluateTourService, TourService tourService, HotelService hotelService, EmailService emailService)
+        private ContactService _contactService;
+        public CommonController(RegisterTourService registerTourService, EvaluateTourService evaluateTourService, TourService tourService, HotelService hotelService, EmailService emailService, ContactService contactService)
         {
             _registerTourService = registerTourService;
             _evaluateTourService = evaluateTourService;
             _tourService = tourService;
             _hotelService = hotelService;
             _emailService = emailService;
+            _contactService = contactService;
         }
 
         #region tours
@@ -56,9 +53,9 @@ namespace EPS.API.Controllers
                 var tourDetail = await _tourService.GetTourDetailById(id);
                 if (tourDetail != null)
                 {
-                    var tourDetailViewModel = new TourDetailViewModel(dto.id,dto.category_id,dto.name,dto.url,
-                        dto.created_time.ToString("dd/M/yyyy", CultureInfo.InvariantCulture),dto.status,dto.background_image,
-                        tourDetail.price,tourDetail.infor,tourDetail.intro,tourDetail.schedule,tourDetail.policy,tourDetail.note);
+                    var tourDetailViewModel = new TourDetailViewModel(dto.id, dto.category_id, dto.name, dto.url,
+                        dto.created_time.ToString("dd/M/yyyy", CultureInfo.InvariantCulture), dto.status, dto.background_image,
+                        tourDetail.price, tourDetail.infor, tourDetail.intro, tourDetail.schedule, tourDetail.policy, tourDetail.note);
                     result.ResultObj = tourDetailViewModel;
                     result.Message = "";
                     result.statusCode = 200;
@@ -119,7 +116,7 @@ namespace EPS.API.Controllers
                 var hotels = await _hotelService.GetHotelByCategoryId(tour.category_id);
                 List<string> inforTour = new List<string>();
                 MatchCollection matches = Regex.Matches(detailTour.infor, @"<strong>.*?</strong>");
-                
+
                 // Use foreach-loop.
                 foreach (Match match in matches)
                 {
@@ -130,11 +127,11 @@ namespace EPS.API.Controllers
                 }
                 var x = inforTour[0] != null ? inforTour[0] : "";
                 string body = @"<p>Xin chào: " + dto.name_register + "</p>" +
-                                @"<p>Sau đây là thông tin của tour:</p>"+
+                                @"<p>Sau đây là thông tin của tour:</p>" +
                                 @"<p>Tên: " + tour.name + "</p>" +
                                 @"<p>Giá: " + detailTour.price + "</p>" +
                                 @"<p>" + inforTour[0] + " " + inforTour[1] + "</p>" +
-                                @"<p>" + inforTour[2] + " " + inforTour[3] +"</p>" +
+                                @"<p>" + inforTour[2] + " " + inforTour[3] + "</p>" +
                                 @"<p>" + inforTour[4] + " " + inforTour[5] + "</p>" +
                                 @"<p>" + inforTour[6] + " " + inforTour[7] + "</p>";
                 UserEmailOptions options = new UserEmailOptions()
@@ -217,6 +214,40 @@ namespace EPS.API.Controllers
                 await _emailService.SendEmailForEmailConfirmation(options);
                 result.ResultObj = id;
                 result.Message = "Xác nhận tour thành công !";
+                result.statusCode = 201;
+                return result;
+            }
+            else
+            {
+                result.ResultObj = id;
+                result.Message = "Đã có lỗi xẩy ra với hệ thống, vui lòng thử lại !";
+                result.statusCode = 500;
+                return result;
+            }
+        }
+        #endregion
+
+        #region about
+        [HttpPut("contact")]
+        public async Task<ApiResult<int>> Contact(int id, [FromForm] ContactCreateDto dto)
+        {
+            ApiResult<int> result = new ApiResult<int>();
+
+            var check = await _contactService.CreateContact(dto);
+            if (check == 0)
+            {
+                UserEmailOptions options = new UserEmailOptions()
+                {
+                    ToEmails = dto.email_register,
+                    Subject = $"Thông tin liên hệ: ",
+                    Body = @"<p>Xin chào: " + dto.name_register + "</p>" +
+                                @"<p>Cảm ơn bạn đã tham khảo dịch vụ của chúng tôi. Chúng tôi sẽ liên hệ theo số điện thoại mà bạn cung cấp!!!</p>" +
+                                @"<p>Thân ái!!!</p>"
+                };
+
+                await _emailService.SendEmailForEmailConfirmation(options);
+                result.ResultObj = id;
+                result.Message = "Xác nhận thông tin liên hệ thành công !";
                 result.statusCode = 201;
                 return result;
             }

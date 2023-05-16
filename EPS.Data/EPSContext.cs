@@ -1,9 +1,6 @@
-﻿using System;
-using System.ComponentModel.DataAnnotations.Schema;
-using EPS.Data.Entities;
+﻿using EPS.Data.Entities;
 using Microsoft.AspNetCore.DataProtection.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata;
 
 namespace EPS.Data
 {
@@ -38,7 +35,7 @@ namespace EPS.Data
         public virtual DbSet<image_tour> image_tours { get; set; }
         public virtual DbSet<blog> blogs { get; set; }
         public virtual DbSet<image_blog> image_blogs { get; set; }
-        public virtual DbSet<content_blog> content_blogs { get; set; }
+        public virtual DbSet<contact> contacts { get; set; }
         public virtual DbSet<v_detail_tour_register> v_detail_tour_register { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -71,7 +68,7 @@ namespace EPS.Data
 
             modelBuilder.Entity<tour_connect_hotel>(entity =>
             {
-                entity.HasKey(e => new { e.id_tour, e.id_hotel});
+                entity.HasKey(e => new { e.id_tour, e.id_hotel });
             });
 
             modelBuilder.Entity<hotel>()
@@ -98,11 +95,6 @@ namespace EPS.Data
             .HasOne<tour>(s => s.tour)
             .WithMany(g => g.image_tours)
             .HasForeignKey(s => s.id_tour);
-
-            modelBuilder.Entity<content_blog>()
-            .HasOne<blog>(s => s.blog)
-            .WithMany(g => g.content_blogs)
-            .HasForeignKey(s => s.id_blog);
 
             modelBuilder.Entity<tour>()
             .HasOne<detail_tour>(s => s.detail_tour)

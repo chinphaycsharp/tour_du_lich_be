@@ -1,14 +1,11 @@
 ﻿using AutoMapper;
 using EPS.Data;
 using EPS.Data.Entities;
-using EPS.Service.Dtos.Common;
-using EPS.Service.Dtos.Privilege;
 using EPS.Service.Dtos.Tour;
 using EPS.Service.Dtos.TourDetail;
 using EPS.Service.Helpers;
 using EPS.Utils.Service;
 using Microsoft.EntityFrameworkCore;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -49,7 +46,7 @@ namespace EPS.Service
             await _baseService.CreateAsync<tour, TourCreateDto>(dto);
             return dto.id;
         }
-        
+
         public async Task<int> CreateDetailTour(DetailTourCreateDto dto, bool isExploiting = false)
         {
             await _baseService.CreateAsync<detail_tour, DetailTourCreateDto>(dto);
@@ -101,8 +98,8 @@ namespace EPS.Service
 
         public async Task<DetailTourDetailDto> GetTourDetailById(int tourId)
         {
-            var detailtour = await _repository.Filter<detail_tour>(x=>x.id_tour == tourId).FirstOrDefaultAsync();
-            if(detailtour != null)
+            var detailtour = await _repository.Filter<detail_tour>(x => x.id_tour == tourId).FirstOrDefaultAsync();
+            if (detailtour != null)
             {
                 DetailTourDetailDto dto = new DetailTourDetailDto();
                 detailtour.id = dto.id;
