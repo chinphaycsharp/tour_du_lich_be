@@ -12,6 +12,7 @@ namespace EPS.Service.Dtos.Tour
         public string created_timeStr { get; set; }
         public DateTime updated_time { get; set; }
         public string updated_timeStr { get; set; }
+        public string background_image { get; set; }
         public int status { get; set; }
     }
 }

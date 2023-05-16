@@ -133,7 +133,7 @@ namespace EPS.API.Controllers
                                 @"<p>Sau đây là thông tin của tour:</p>"+
                                 @"<p>Tên: " + tour.name + "</p>" +
                                 @"<p>Giá: " + detailTour.price + "</p>" +
-                                @"<p>" + inforTour[0] + " " + inforTour[1]  + "</p>" +
+                                @"<p>" + inforTour[0] + " " + inforTour[1] + "</p>" +
                                 @"<p>" + inforTour[2] + " " + inforTour[3] +"</p>" +
                                 @"<p>" + inforTour[4] + " " + inforTour[5] + "</p>" +
                                 @"<p>" + inforTour[6] + " " + inforTour[7] + "</p>";

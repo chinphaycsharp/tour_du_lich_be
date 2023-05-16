@@ -101,7 +101,7 @@ namespace EPS.API.Controllers
                 result.Message = "Đã có lỗi xẩy ra với hệ thống, vui lòng thử lại !";
                 result.statusCode = 500;
             }
-            var checkdetails = await _tourService.DeleteDetailTours(id);
+            var checkdetails = await _tourService.DeleteDetailTours(detailTour.id);
             if (checkdetails == 1)
             {
                 var check = await _tourService.DeleteTours(id);
@@ -149,7 +149,7 @@ namespace EPS.API.Controllers
             {
                 var detailTour = await _tourService.GetDetailTourById(id);
                 DetailTourUpdateDto detail = new DetailTourUpdateDto(id, dto.price, dto.infor, dto.intro, dto.schedule, dto.policy, dto.note, Request.Form.Files[0].FileName);
-                var checkDetail = await _tourService.UpdateDetailTourById(detailTour.id_tour, detail);
+                var checkDetail = await _tourService.UpdateDetailTourById(detailTour.id, detail);
                 if(checkDetail == 1)
                 {
                     result.ResultObj = check;

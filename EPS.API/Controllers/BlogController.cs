@@ -4,8 +4,10 @@ using EPS.Data.Entities;
 using EPS.Service;
 using EPS.Service.Dtos.Blog;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using System;
+using System.IO;
 using System.Threading.Tasks;
 
 namespace EPS.API.Controllers
@@ -16,10 +18,11 @@ namespace EPS.API.Controllers
     public class BlogController : BaseController
     {
         private BlogService _blogService;
-
-        public BlogController(BlogService blogService)
+        private IWebHostEnvironment _webHostEnvironment;
+        public BlogController(BlogService blogService, IWebHostEnvironment webHostEnvironment)
         {
             _blogService = blogService;
+            _webHostEnvironment = webHostEnvironment;
         }
 
         [HttpGet]
@@ -34,9 +37,25 @@ namespace EPS.API.Controllers
         {
             dto.created_time = DateTime.Now;
             ApiResult<int> result = new ApiResult<int>();
+            if (Request.Form.Files.Count < 0)
+            {
+                result.ResultObj = default;
+                result.Message = "Ảnh không được để trống !";
+                result.statusCode = 201;
+                return result;
+            }
+            var path = Path.Combine(_webHostEnvironment.WebRootPath, "common/blog", Request.Form.Files[0].FileName);
+            using (var fileSteam = new FileStream(path, FileMode.Create))
+            {
+                await Request.Form.Files[0].CopyToAsync(fileSteam);
+            }
+            dto.img_src = Request.Form.Files[0].FileName;
+            dto.created_time = DateTime.Now;
             var id = await _blogService.CreateBlog(dto);
             if (id == 0)
             {
+                var idblog = await _blogService.GetLastBlogRecord();
+                var contentBlog = await _blogService.CreateContentBlog(dto.content, idblog);
                 result.ResultObj = id;
                 result.Message = "Tạo mới thành công !";
                 result.statusCode = 201;
@@ -117,5 +136,6 @@ namespace EPS.API.Controllers
                 return result;
             }
         }
+
     }
 }

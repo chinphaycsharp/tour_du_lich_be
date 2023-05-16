@@ -25,7 +25,8 @@ namespace EPS.Service.Profiles
         {
             CreateMap<tour, TourGridDto>()
                 .ForMember(dest => dest.created_timeStr, mo => mo.MapFrom(src => src.created_time.ToString("dd/M/yyyy", CultureInfo.InvariantCulture)))
-                 .ForMember(dest => dest.updated_timeStr, mo => mo.MapFrom(src => src.updated_time.ToString("dd/M/yyyy", CultureInfo.InvariantCulture)));
+                 .ForMember(dest => dest.updated_timeStr, mo => mo.MapFrom(src => src.updated_time.ToString("dd/M/yyyy", CultureInfo.InvariantCulture)))
+                 .ForMember(dest => dest.background_image, mo => mo.MapFrom(src => "http://192.168.1.5:5001/uploads/" + src.background_image));
 
             CreateMap<detail_tour, TourDetailDto>();
 
@@ -34,7 +35,7 @@ namespace EPS.Service.Profiles
                             .ForMember(dest => dest.updated_timeStr, mo => mo.MapFrom(src => src.updated_time.ToString("dd/M/yyyy", CultureInfo.InvariantCulture)));
 
             CreateMap<image_tour, ImageTourGridDto>()
-               .ForMember(dest => dest.img_src, mo => mo.MapFrom(src => "https://3k2nnjkh-5001.asse.devtunnels.ms/uploads/" + src.img_src));
+               .ForMember(dest => dest.img_src, mo => mo.MapFrom(src => "http://192.168.1.5:5001/uploads/" + src.img_src));
         }
     }
 }

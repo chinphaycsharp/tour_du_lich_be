@@ -3,6 +3,7 @@ using EPS.API.Helpers;
 using EPS.Data.Entities;
 using EPS.Service;
 using EPS.Service.Dtos.Common.RegisterTour;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -11,6 +12,9 @@ using System.Threading.Tasks;
 
 namespace EPS.API.Controllers
 {
+    [Produces("application/json")]
+    [Route("api/registertour")]
+    [Authorize]
     public class RegisterTourController : BaseController
     {
         private RegisterTourService _registerTourService;
