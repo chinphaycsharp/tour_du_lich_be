@@ -63,7 +63,7 @@ namespace EPS.API.Controllers
             if (id == 0)
             {
                 var lastId = await _tourService.GetLastTourRecord();
-                DetailTourCreateDto detail = new DetailTourCreateDto(lastId, dto.price, dto.infor, dto.intro, dto.schedule, dto.policy, dto.note, Request.Form.Files[0].FileName);
+                DetailTourCreateDto detail = new DetailTourCreateDto(lastId, dto.price, dto.infor, dto.intro, dto.schedule, dto.policy, dto.note, Request.Form.Files[0].FileName,dto.tour_guide, dto.isurance);
                 var checkDetail = await _tourService.CreateDetailTour(detail);
                 if (checkDetail == 0)
                 {
@@ -148,7 +148,7 @@ namespace EPS.API.Controllers
             if (check == 1)
             {
                 var detailTour = await _tourService.GetDetailTourById(id);
-                DetailTourUpdateDto detail = new DetailTourUpdateDto(id, dto.price, dto.infor, dto.intro, dto.schedule, dto.policy, dto.note, Request.Form.Files[0].FileName);
+                DetailTourUpdateDto detail = new DetailTourUpdateDto(id, dto.price, dto.infor, dto.intro, dto.schedule, dto.policy, dto.note, Request.Form.Files[0].FileName, dto.tour_guide, dto.isurance);
                 var checkDetail = await _tourService.UpdateDetailTourById(detailTour.id, detail);
                 if(checkDetail == 1)
                 {

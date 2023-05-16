@@ -17,5 +17,6 @@ namespace EPS.Service.Dtos.TourDetail
         public string policy { get; set; }
         public string note { get; set; }
         public string tour_guide { get; set; }
+        public string isurance { get; set; }
     }
 }
