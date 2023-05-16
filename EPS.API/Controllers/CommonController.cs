@@ -228,7 +228,7 @@ namespace EPS.API.Controllers
         #endregion
 
         #region about
-        [HttpPut("contact")]
+        [HttpPost("contact")]
         public async Task<ApiResult<int>> Contact(int id, [FromForm] ContactCreateDto dto)
         {
             ApiResult<int> result = new ApiResult<int>();

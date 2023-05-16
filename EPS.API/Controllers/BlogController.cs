@@ -121,9 +121,9 @@ namespace EPS.API.Controllers
 
         [CustomAuthorize(PrivilegeList.ManageBlog)]
         [HttpGet("getbyid/{id}")]
-        public async Task<ApiResult<BlogDetailRegexDto>> GetBlogById(int id)
+        public async Task<ApiResult<BlogDetailDto>> GetBlogById(int id)
         {
-            ApiResult<BlogDetailRegexDto> result = new ApiResult<BlogDetailRegexDto>();
+            ApiResult<BlogDetailDto> result = new ApiResult<BlogDetailDto>();
             var dto = await _blogService.GetBlogById(id);
             if (dto != null)
             {
@@ -143,14 +143,14 @@ namespace EPS.API.Controllers
 
         #region image_tours
         [CustomAuthorize(PrivilegeList.ManageImage)]
-        [HttpGet("imagetours")]
+        [HttpGet("imageblogs")]
         public async Task<IActionResult> GetListImageBlogs([FromQuery] ImageBlogGridPagingDto pagingModel)
         {
             return Ok(await _imageService.GetImageBlogs(pagingModel));
         }
 
         [CustomAuthorize(PrivilegeList.ManageTour)]
-        [HttpPost("imagetours")]
+        [HttpPost("imageblogs")]
         public async Task<ApiResult<bool>> CreateImageBlog([FromForm] ImageBlogViewModel dto)
         {
             ApiResult<bool> result = new ApiResult<bool>();
@@ -162,7 +162,7 @@ namespace EPS.API.Controllers
                     dto.img_src = item.FileName;
                     try
                     {
-                        var path = Path.Combine(_webHostEnvironment.WebRootPath, "uploads", item.FileName);
+                        var path = Path.Combine(_webHostEnvironment.WebRootPath, "common/blog", item.FileName);
                         ImageBlogCreateDto imagetour = new ImageBlogCreateDto(dto.id_blog, item.FileName);
                         var id = await _imageService.CreateImageBlogs(imagetour);
                         using (var fileSteam = new FileStream(path, FileMode.Create))

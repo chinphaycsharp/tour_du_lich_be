@@ -16,8 +16,6 @@ namespace EPS.Service.Profiles
         {
             CreateMap<BlogCreateDto, blog>();
             CreateMap<BlogUpdateDto, blog>();
-            CreateMap<BlogContentCreateDto, content_blog>();
-            CreateMap<BlogContentUpdateDto, content_blog>();
         }
     }
 

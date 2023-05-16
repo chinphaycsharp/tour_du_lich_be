@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using EPS.Data.Entities;
 using EPS.Service.Dtos.Contact;
+using EPS.Service.Dtos.ImageBlog;
 using EPS.Service.Dtos.ImageTour;
 using System;
 using System.Collections.Generic;
@@ -23,6 +24,8 @@ namespace EPS.Service.Profiles
         {
             CreateMap<image_tour, ImageTourGridDto>()
                .ForMember(dest => dest.img_src, mo => mo.MapFrom(src => "http://192.168.1.5:5001/uploads/" + src.img_src));
+            CreateMap<image_blog, ImageBlogGridDto>()
+              .ForMember(dest => dest.img_src, mo => mo.MapFrom(src => "http://192.168.1.5:5001/common/blog/" + src.img_src));
         }
     }
 }

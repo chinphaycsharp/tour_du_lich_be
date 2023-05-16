@@ -9,7 +9,6 @@ namespace EPS.Data.Entities
         public blog()
         {
             image_blogs = new HashSet<image_blog>();
-            content_blogs = new HashSet<content_blog>();
         }
 
         public int id { get; set; }
@@ -18,6 +17,5 @@ namespace EPS.Data.Entities
         public DateTime created_time { get; set; }
         public DateTime updated_time { get; set; }
         public virtual ICollection<image_blog> image_blogs { get; set; }
-        public virtual ICollection<content_blog> content_blogs{ get; set; }
     }
 }

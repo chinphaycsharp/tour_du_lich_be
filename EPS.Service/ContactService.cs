@@ -1,14 +1,10 @@
 ﻿using AutoMapper;
-using EPS.Data.Entities;
 using EPS.Data;
-using EPS.Service.Dtos.Category;
+using EPS.Data.Entities;
+using EPS.Service.Dtos.Contact;
 using EPS.Service.Helpers;
 using EPS.Utils.Service;
-using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
-using EPS.Service.Dtos.Contact;
 
 namespace EPS.Service
 {

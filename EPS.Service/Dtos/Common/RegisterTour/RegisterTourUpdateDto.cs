@@ -13,5 +13,6 @@ namespace EPS.Service.Dtos.Common.RegisterTour
         public string email_register { get; set; }
         public DateTime updated_time { get; set; }
         public int status { get; set; }
+        public string payment_method { get; set; }
     }
 }
