@@ -17,7 +17,7 @@ using System.Threading.Tasks;
 namespace EPS.API.Controllers
 {
     [Produces("application/json")]
-    [Route("api/blog")]
+    [Route("api/blogs")]
     [Authorize]
     public class BlogController : BaseController
     {
@@ -101,9 +101,22 @@ namespace EPS.API.Controllers
         public async Task<ApiResult<int>> UpdateBlog(int id, [FromForm] BlogUpdateDto dto)
         {
             ApiResult<int> result = new ApiResult<int>();
+            if (Request.Form.Files.Count < 0)
+            {
+                result.ResultObj = default;
+                result.Message = "Ảnh không được để trống !";
+                result.statusCode = 201;
+                return result;
+            }
+            var path = Path.Combine(_webHostEnvironment.WebRootPath, "common/blog", Request.Form.Files[0].FileName);
+            using (var fileSteam = new FileStream(path, FileMode.Create))
+            {
+                await Request.Form.Files[0].CopyToAsync(fileSteam);
+            }
+            dto.img_src = Request.Form.Files[0].FileName;
             dto.updated_time = DateTime.Now;
             var check = await _blogService.UpdateBlog(id, dto);
-            if (check == 1)
+             if (check == 1)
             {
                 result.ResultObj = check;
                 result.Message = "Cập nhập thành công !";

@@ -35,6 +35,7 @@ namespace EPS.Data
         public virtual DbSet<image_tour> image_tours { get; set; }
         public virtual DbSet<blog> blogs { get; set; }
         public virtual DbSet<image_blog> image_blogs { get; set; }
+        public virtual DbSet<image_hotel> image_hotels { get; set; }
         public virtual DbSet<contact> contacts { get; set; }
         public virtual DbSet<v_detail_tour_register> v_detail_tour_register { get; set; }
 
@@ -105,6 +106,11 @@ namespace EPS.Data
             .HasOne<blog>(s => s.blog)
             .WithMany(g => g.image_blogs)
             .HasForeignKey(s => s.id_blog);
+
+            modelBuilder.Entity<image_hotel>()
+                .HasOne<hotel>(s => s.hotel)
+                .WithMany(g => g.image_hotels)
+                .HasForeignKey(s => s.id_hotel);
         }
     }
 }

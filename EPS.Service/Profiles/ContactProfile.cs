@@ -1,11 +1,5 @@
 ﻿using AutoMapper;
 using EPS.Data.Entities;
-using EPS.Service.Dtos.Blog.BlogContent;
-using EPS.Service.Dtos.Blog;
-using System;
-using System.Collections.Generic;
-using System.Text;
-using EPS.Service.Dtos.Category;
 using EPS.Service.Dtos.Contact;
 using System.Globalization;
 

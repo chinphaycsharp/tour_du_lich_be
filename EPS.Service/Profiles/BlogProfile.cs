@@ -1,12 +1,7 @@
 ﻿using AutoMapper;
 using EPS.Data.Entities;
 using EPS.Service.Dtos.Blog;
-using EPS.Service.Dtos.Blog.BlogContent;
-using EPS.Service.Dtos.Category;
-using System;
-using System.Collections.Generic;
 using System.Globalization;
-using System.Text;
 
 namespace EPS.Service.Profiles
 {

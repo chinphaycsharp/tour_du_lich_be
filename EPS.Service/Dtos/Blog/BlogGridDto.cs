@@ -9,7 +9,7 @@ namespace EPS.Service.Dtos.Blog
         public int id { get; set; }
         public string title { get; set; }
         public string img_src { get; set; }
-        public string content { get; set; }
+        public string contents { get; set; }
         public DateTime created_time { get; set; }
         public DateTime updated_time { get; set; }
         public string created_timeStr { get; set; }

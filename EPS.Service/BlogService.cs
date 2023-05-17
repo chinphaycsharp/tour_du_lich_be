@@ -1,18 +1,12 @@
 ﻿using AutoMapper;
-using EPS.Data.Entities;
 using EPS.Data;
-using EPS.Service.Dtos.Category;
+using EPS.Data.Entities;
+using EPS.Service.Dtos.Blog;
 using EPS.Service.Helpers;
 using EPS.Utils.Service;
-using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading.Tasks;
-using EPS.Service.Dtos.Blog;
-using System.Text.RegularExpressions;
-using EPS.Service.Dtos.Blog.BlogContent;
-using System.Linq;
 using Microsoft.EntityFrameworkCore;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace EPS.Service
 {

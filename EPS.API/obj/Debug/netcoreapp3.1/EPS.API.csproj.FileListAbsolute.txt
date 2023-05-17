@@ -1798,7 +1798,6 @@ D:\tour_du_lich_be\EPS.API\obj\Debug\netcoreapp3.1\EPS.API.GeneratedMSBuildEdito
 D:\tour_du_lich_be\EPS.API\obj\Debug\netcoreapp3.1\EPS.API.AssemblyInfoInputs.cache
 D:\tour_du_lich_be\EPS.API\obj\Debug\netcoreapp3.1\EPS.API.AssemblyInfo.cs
 D:\tour_du_lich_be\EPS.API\obj\Debug\netcoreapp3.1\EPS.API.csproj.CoreCompileInputs.cache
-D:\tour_du_lich_be\EPS.API\obj\Debug\netcoreapp3.1\EPS.API.MvcApplicationPartsAssemblyInfo.cs
 D:\tour_du_lich_be\EPS.API\obj\Debug\netcoreapp3.1\EPS.API.MvcApplicationPartsAssemblyInfo.cache
 D:\tour_du_lich_be\EPS.API\obj\Debug\netcoreapp3.1\staticwebassets\EPS.API.StaticWebAssets.Manifest.cache
 D:\tour_du_lich_be\EPS.API\obj\Debug\netcoreapp3.1\EPS.API.RazorTargetAssemblyInfo.cache
@@ -1999,10 +1998,5 @@ C:\Users\Admin\Desktop\tour_du_lich_be\EPS.API\obj\Debug\netcoreapp3.1\EPS.API.c
 C:\Users\Admin\Desktop\tour_du_lich_be\EPS.API\obj\Debug\netcoreapp3.1\EPS.API.dll
 C:\Users\Admin\Desktop\tour_du_lich_be\EPS.API\obj\Debug\netcoreapp3.1\EPS.API.pdb
 C:\Users\Admin\Desktop\tour_du_lich_be\EPS.API\obj\Debug\netcoreapp3.1\EPS.API.genruntimeconfig.cache
-D:\tour_du_lich_be\EPS.API\bin\Debug\netcoreapp3.1\Microsoft.Owin.dll
-D:\tour_du_lich_be\EPS.API\bin\Debug\netcoreapp3.1\Owin.dll
-D:\tour_du_lich_be\EPS.API\obj\Debug\netcoreapp3.1\staticwebassets\EPS.API.StaticWebAssets.Pack.cache
-D:\tour_du_lich_be\EPS.API\obj\Debug\netcoreapp3.1\staticwebassets\msbuild.EPS.API.Microsoft.AspNetCore.StaticWebAssets.props
-D:\tour_du_lich_be\EPS.API\obj\Debug\netcoreapp3.1\staticwebassets\msbuild.build.EPS.API.props
-D:\tour_du_lich_be\EPS.API\obj\Debug\netcoreapp3.1\staticwebassets\msbuild.buildMultiTargeting.EPS.API.props
-D:\tour_du_lich_be\EPS.API\obj\Debug\netcoreapp3.1\staticwebassets\msbuild.buildTransitive.EPS.API.props
+D:\tour_du_lich_be\EPS.API\obj\Debug\netcoreapp3.1\staticwebassets\EPS.API.StaticWebAssets.xml
+D:\tour_du_lich_be\EPS.API\obj\Debug\netcoreapp3.1\scopedcss\bundle\EPS.API.styles.css

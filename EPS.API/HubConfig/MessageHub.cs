@@ -1,4 +1,9 @@
-﻿using Microsoft.AspNetCore.SignalR;
+﻿using EPS.Data;
+using EPS.Data.Entities;
+using EPS.Service;
+using Microsoft.AspNetCore.SignalR;
+using System;
+using System.Globalization;
 
 namespace EPS.API.HubConfig
 {
@@ -7,24 +12,22 @@ namespace EPS.API.HubConfig
         //private MessageService _messageService;
         private Data.EPSContext _context;
         //public static System.Collections.Generic.List<Message> messages;
-        //public MessageHub(MessageService messageService,EPSContext context)
-        //{
-        //    _context = context;
-        //}
-
-        public async void SendMessage(string userName, string messageSend, int user_id, int isAdmin, int clientId)
+        public MessageHub(EPSContext context)
         {
-            //var strDate = DateTime.Now.ToString("dd/M/yyyy", CultureInfo.InvariantCulture);
-            //message m = new message();
-            //m.username = userName;
-            //m.user_id = user_id;
-            //m.isAdmin = isAdmin;
-            //m.createdDate = DateTime.Now;
-            //m.content = messageSend;
-            //m.clientId = clientId;
-            //await _context.message.AddAsync(m);
-            //_context.SaveChanges();
-            //await Clients.All.SendAsync("SendMessage", userName, messageSend, user_id, strDate, isAdmin, clientId);
+            _context = context;
+        }
+
+        public async void EvaluateTour(int id_tour, string messageSend, int starCount)
+        {
+            var strDate = DateTime.Now.ToString("dd/M/yyyy", CultureInfo.InvariantCulture);
+            evaluate_tour m = new evaluate_tour();
+            m.id_tour = id_tour;
+            m.content = messageSend;
+            m.star_count = starCount;
+            m.created_time = DateTime.Now; 
+            await _context.evaluate_tours.AddAsync(m);
+            _context.SaveChanges();
+            await Clients.All.SendAsync("SendMessage", id_tour, messageSend, starCount);
             // await _messageService.SaveMessage(messageDto);
         }
 
@@ -35,11 +38,4 @@ namespace EPS.API.HubConfig
             //Clients.All.SendAsync("NewUser", userName);
         }
     }
-
-    //public class MessageResult
-    //{
-    //    public List<message> messages { get; set; }
-    //    public bool isAdmin { get; set; }
-    //    public bool notification { get; set; }
-    //}
 }
