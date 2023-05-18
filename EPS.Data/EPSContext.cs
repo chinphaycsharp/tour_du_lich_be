@@ -32,10 +32,8 @@ namespace EPS.Data
         public virtual DbSet<tour_connect_hotel> tour_connect_hotels { get; set; }
         public virtual DbSet<evaluate_tour> evaluate_tours { get; set; }
         public virtual DbSet<register_tour> register_tours { get; set; }
-        public virtual DbSet<image_tour> image_tours { get; set; }
         public virtual DbSet<blog> blogs { get; set; }
-        public virtual DbSet<image_blog> image_blogs { get; set; }
-        public virtual DbSet<image_hotel> image_hotels { get; set; }
+        public virtual DbSet<image> images { get; set; }
         public virtual DbSet<contact> contacts { get; set; }
         public virtual DbSet<v_detail_tour_register> v_detail_tour_register { get; set; }
 
@@ -92,25 +90,10 @@ namespace EPS.Data
             .WithMany(g => g.register_tours)
             .HasForeignKey(s => s.id_tour);
 
-            modelBuilder.Entity<image_tour>()
-            .HasOne<tour>(s => s.tour)
-            .WithMany(g => g.image_tours)
-            .HasForeignKey(s => s.id_tour);
-
             modelBuilder.Entity<tour>()
             .HasOne<detail_tour>(s => s.detail_tour)
             .WithOne(ad => ad.tour)
             .HasForeignKey<detail_tour>(ad => ad.id_tour);
-
-            modelBuilder.Entity<image_blog>()
-            .HasOne<blog>(s => s.blog)
-            .WithMany(g => g.image_blogs)
-            .HasForeignKey(s => s.id_blog);
-
-            modelBuilder.Entity<image_hotel>()
-                .HasOne<hotel>(s => s.hotel)
-                .WithMany(g => g.image_hotels)
-                .HasForeignKey(s => s.id_hotel);
         }
     }
 }

@@ -11,7 +11,6 @@ namespace EPS.Data.Entities
         {
             evaluate_tours = new HashSet<evaluate_tour>();
             register_tours = new HashSet<register_tour>();
-            image_tours = new HashSet<image_tour>();
             tour_connect_hotels = new HashSet<tour_connect_hotel>();
         }
         public int id { get; set; }
@@ -29,8 +28,6 @@ namespace EPS.Data.Entities
         public virtual detail_tour detail_tour { get; set; }
         public virtual ICollection<evaluate_tour> evaluate_tours { get; set; }
         public virtual ICollection<register_tour> register_tours { get; set; }
-        public virtual ICollection<image_tour> image_tours { get; set; }
-
         [InverseProperty("tour")]
         public virtual ICollection<tour_connect_hotel> tour_connect_hotels { get; set; }
     }

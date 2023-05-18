@@ -1,9 +1,7 @@
-﻿using EPS.Service.Dtos.ImageTour;
-using EPS.Utils.Service;
+﻿using EPS.Utils.Service;
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
-using System.Text;
 
 namespace EPS.Service.Dtos.Hotel
 {

@@ -1,12 +1,10 @@
 ﻿using EPS.API.Commons;
 using EPS.API.Helpers;
-using EPS.API.Models.ImageBlog;
-using EPS.API.Models.ImageTour;
+using EPS.API.Models.Image;
 using EPS.Data.Entities;
 using EPS.Service;
 using EPS.Service.Dtos.Blog;
 using EPS.Service.Dtos.ImageBlog;
-using EPS.Service.Dtos.ImageTour;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -116,7 +114,7 @@ namespace EPS.API.Controllers
             dto.img_src = Request.Form.Files[0].FileName;
             dto.updated_time = DateTime.Now;
             var check = await _blogService.UpdateBlog(id, dto);
-             if (check == 1)
+            if (check == 1)
             {
                 result.ResultObj = check;
                 result.Message = "Cập nhập thành công !";
@@ -157,14 +155,14 @@ namespace EPS.API.Controllers
         #region image_tours
         [CustomAuthorize(PrivilegeList.ManageImage)]
         [HttpGet("imageblogs")]
-        public async Task<IActionResult> GetListImageBlogs([FromQuery] ImageBlogGridPagingDto pagingModel)
+        public async Task<IActionResult> GetListImageBlogs([FromQuery] ImageGridPagingDto pagingModel)
         {
             return Ok(await _imageService.GetImageBlogs(pagingModel));
         }
 
         [CustomAuthorize(PrivilegeList.ManageTour)]
         [HttpPost("imageblogs")]
-        public async Task<ApiResult<bool>> CreateImageBlog([FromForm] ImageBlogViewModel dto)
+        public async Task<ApiResult<bool>> CreateImageBlog([FromForm] ImageViewModel dto)
         {
             ApiResult<bool> result = new ApiResult<bool>();
             bool isSuccess = true;
@@ -176,7 +174,7 @@ namespace EPS.API.Controllers
                     try
                     {
                         var path = Path.Combine(_webHostEnvironment.WebRootPath, "common/blog", item.FileName);
-                        ImageBlogCreateDto imagetour = new ImageBlogCreateDto(dto.id_blog, item.FileName);
+                        ImageCreateDto imagetour = new ImageCreateDto(dto.type_id, item.FileName, dto.type);
                         var id = await _imageService.CreateImageBlogs(imagetour);
                         using (var fileSteam = new FileStream(path, FileMode.Create))
                         {

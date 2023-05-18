@@ -2,8 +2,6 @@
 using EPS.Data;
 using EPS.Data.Entities;
 using EPS.Service.Dtos.ImageBlog;
-using EPS.Service.Dtos.ImageTour;
-using EPS.Service.Dtos.Tour;
 using EPS.Service.Helpers;
 using EPS.Utils.Service;
 using System.Threading.Tasks;
@@ -23,25 +21,25 @@ namespace EPS.Service
             _baseService = new EPSBaseService(repository, mapper);
         }
 
-        public async Task<PagingResult<ImageTourGridDto>> GetImageTours(ImageTourGridPagingDto dto)
+        public async Task<PagingResult<ImageGridDto>> GetImageTours(ImageGridPagingDto dto)
         {
-            return await _baseService.FilterPagedAsync<image_tour, ImageTourGridDto>(dto);
+            return await _baseService.FilterPagedAsync<image, ImageGridDto>(dto);
         }
 
-        public async Task<int> CreateImageTours(ImageTourCreateDto dto, bool isExploiting = false)
+        public async Task<int> CreateImageTours(ImageCreateDto dto, bool isExploiting = false)
         {
-            await _baseService.CreateAsync<image_tour, ImageTourCreateDto>(dto);
+            await _baseService.CreateAsync<image, ImageCreateDto>(dto);
             return dto.id;
         }
 
-        public async Task<PagingResult<ImageBlogGridDto>> GetImageBlogs(ImageBlogGridPagingDto dto)
+        public async Task<PagingResult<ImageGridDto>> GetImageBlogs(ImageGridPagingDto dto)
         {
-            return await _baseService.FilterPagedAsync<image_blog, ImageBlogGridDto>(dto);
+            return await _baseService.FilterPagedAsync<image, ImageGridDto>(dto);
         }
 
-        public async Task<int> CreateImageBlogs(ImageBlogCreateDto dto, bool isExploiting = false)
+        public async Task<int> CreateImageBlogs(ImageCreateDto dto, bool isExploiting = false)
         {
-            await _baseService.CreateAsync<image_blog, ImageBlogCreateDto >(dto);
+            await _baseService.CreateAsync<image, ImageCreateDto >(dto);
             return dto.id;
         }
     }

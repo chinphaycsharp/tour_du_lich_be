@@ -5,14 +5,10 @@ using System.Text;
 
 namespace EPS.Data.Entities
 {
-    public partial class image_blog
+    public partial class image
     {
         public int id { get; set; }
-        public int id_blog { get; set; }
-
-        [ForeignKey("id_blog")]
-        [InverseProperty("image_blogs")]
-        public virtual blog blog{ get; set; }
+        public int type_id { get; set; }
         public string img_src { get; set; }
         public int status { get; set; }
     }

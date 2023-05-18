@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using EPS.Data.Entities;
-using EPS.Service.Dtos.ImageTour;
+using EPS.Service.Dtos.ImageBlog;
 using EPS.Service.Dtos.Tour;
 using EPS.Service.Dtos.TourDetail;
 using System.Globalization;
@@ -15,7 +15,7 @@ namespace EPS.Service.Profiles
             CreateMap<TourUpdateDto, tour>();
             CreateMap<DetailTourCreateDto, detail_tour>();
             CreateMap<DetailTourUpdateDto, detail_tour>();
-            CreateMap<ImageTourCreateDto, image_tour>();
+            CreateMap<ImageCreateDto, image>();
         }
     }
 

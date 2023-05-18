@@ -2000,3 +2000,4 @@ C:\Users\Admin\Desktop\tour_du_lich_be\EPS.API\obj\Debug\netcoreapp3.1\EPS.API.p
 C:\Users\Admin\Desktop\tour_du_lich_be\EPS.API\obj\Debug\netcoreapp3.1\EPS.API.genruntimeconfig.cache
 D:\tour_du_lich_be\EPS.API\obj\Debug\netcoreapp3.1\staticwebassets\EPS.API.StaticWebAssets.xml
 D:\tour_du_lich_be\EPS.API\obj\Debug\netcoreapp3.1\scopedcss\bundle\EPS.API.styles.css
+D:\tour_du_lich_be\EPS.API\obj\Debug\netcoreapp3.1\EPS.API.MvcApplicationPartsAssemblyInfo.cs

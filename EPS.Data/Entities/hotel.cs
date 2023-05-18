@@ -11,7 +11,6 @@ namespace EPS.Data.Entities
         public hotel()
         {
             tour_connect_hotels = new HashSet<tour_connect_hotel>();
-            image_hotels = new HashSet<image_hotel>();
         }
         public int id { get; set; }
         public int category_id { get; set; }
@@ -26,6 +25,5 @@ namespace EPS.Data.Entities
 
         [InverseProperty("hotel")]
         public virtual ICollection<tour_connect_hotel> tour_connect_hotels { get; set; }
-        public virtual ICollection<image_hotel> image_hotels{ get; set; }
     }
 }

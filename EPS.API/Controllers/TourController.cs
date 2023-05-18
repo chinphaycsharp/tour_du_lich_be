@@ -1,11 +1,11 @@
 ﻿using EPS.API.Commons;
 using EPS.API.Helpers;
-using EPS.API.Models.ImageTour;
+using EPS.API.Models.Image;
 using EPS.API.Models.Tour;
 using EPS.Data.Entities;
 using EPS.Service;
 using EPS.Service.Dtos.Common.RegisterTour;
-using EPS.Service.Dtos.ImageTour;
+using EPS.Service.Dtos.ImageBlog;
 using EPS.Service.Dtos.Tour;
 using EPS.Service.Dtos.TourDetail;
 using Microsoft.AspNetCore.Authorization;
@@ -214,14 +214,14 @@ namespace EPS.API.Controllers
         #region image_tours
         [CustomAuthorize( PrivilegeList.ManageImage)]
         [HttpGet("imagetours")]
-        public async Task<IActionResult> GetListImageTours([FromQuery] ImageTourGridPagingDto pagingModel)
+        public async Task<IActionResult> GetListImageTours([FromQuery] ImageGridPagingDto pagingModel)
         {
             return Ok(await _imageTourService.GetImageTours(pagingModel));
         }
 
         [CustomAuthorize(PrivilegeList.ManageTour)]
         [HttpPost("imagetours")]
-        public async Task<ApiResult<bool>> CreateImageTour([FromForm] ImageTourViewModel dto)
+        public async Task<ApiResult<bool>> CreateImageTour([FromForm] ImageViewModel dto)
         {
             ApiResult<bool> result = new ApiResult<bool>();
             bool isSuccess = true;
@@ -233,7 +233,7 @@ namespace EPS.API.Controllers
                     try
                     {
                         var path = Path.Combine(_webHostEnvironment.WebRootPath, "uploads", item.FileName);
-                        ImageTourCreateDto imagetour = new ImageTourCreateDto(dto.id_tour, item.FileName);
+                        ImageCreateDto imagetour = new ImageCreateDto(dto.type_id, item.FileName, dto.type);
                         var id = await _imageTourService.CreateImageTours(imagetour);
                         using (var fileSteam = new FileStream(path, FileMode.Create))
                         {
