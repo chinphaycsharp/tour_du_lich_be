@@ -25,20 +25,33 @@ namespace EPS.Service
             _baseService = new EPSBaseService(repository, mapper);
         }
 
-        public async Task<PagingResult<HotelGridDto>> GetTours(HotelPagingGridDto dto)
+        public async Task<PagingResult<HotelGridDto>> GetHotels(HotelPagingGridDto dto)
         {
             return await _baseService.FilterPagedAsync<hotel, HotelGridDto>(dto);
         }
 
-        public async Task<List<hotel>> GetHotelByCategoryId(int category_id)
+        public async Task<List<HotelGridDto>> GetHotelByCategoryId(int category_id)
         {
-            return await _repository.Filter<hotel>(x => x.category_id == category_id).ToListAsync();
+            var result = await _repository.Filter<hotel>(x => x.category_id == category_id).ToListAsync();
+            List<HotelGridDto> hotels = new List<HotelGridDto>();
+            foreach (var item in result)
+            {
+                HotelGridDto hotel = new HotelGridDto()
+                {
+                    id = item.id,
+                    category_id = item.category_id,
+                    name = item.name,
+                    status = item.status,
+                };
+                hotels.Add(hotel);
+            }
+            return hotels;
         }
 
-        public async Task<PagingResult<HotelGridDto>> GetCategories(HotelPagingGridDto dto)
-        {
-            return await _baseService.FilterPagedAsync<hotel, HotelGridDto>(dto);
-        }
+        //public async Task<PagingResult<HotelGridDto>> GetHotels(HotelPagingGridDto dto)
+        //{
+        //    return await _baseService.FilterPagedAsync<hotel, HotelGridDto>(dto);
+        //}
 
         public async Task<int> CreateHotel(HotelCreateDto dto, bool isExploiting = false)
         {

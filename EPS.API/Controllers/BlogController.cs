@@ -30,7 +30,7 @@ namespace EPS.API.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetListCategories([FromQuery] BlogPagingGridDto pagingModel)
+        public async Task<IActionResult> GetBlogs([FromQuery] BlogPagingGridDto pagingModel)
         {
             return Ok(await _blogService.GetBlog(pagingModel));
         }
@@ -175,10 +175,14 @@ namespace EPS.API.Controllers
                     {
                         var path = Path.Combine(_webHostEnvironment.WebRootPath, "common/blog", item.FileName);
                         ImageCreateDto imagetour = new ImageCreateDto(dto.type_id, item.FileName, dto.type);
+
                         var id = await _imageService.CreateImageBlogs(imagetour);
-                        using (var fileSteam = new FileStream(path, FileMode.Create))
+                        if (id == 0)
                         {
-                            await item.CopyToAsync(fileSteam);
+                            using (var fileSteam = new FileStream(path, FileMode.Create))
+                            {
+                                await item.CopyToAsync(fileSteam);
+                            }
                         }
                     }
                     catch (Exception ex)

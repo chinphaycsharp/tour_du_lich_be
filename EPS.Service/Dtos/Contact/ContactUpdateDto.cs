@@ -6,7 +6,6 @@ namespace EPS.Service.Dtos.Contact
 {
     public class ContactUpdateDto
     {
-        public int id { get; set; }
         public string name_register { get; set; }
         public string address_register { get; set; }
         public string phone_register { get; set; }

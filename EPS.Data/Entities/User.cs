@@ -32,6 +32,7 @@ namespace EPS.Data.Entities
         public DateTime? Updated_Date { get; set; }
         public DateTime? Last_Login { get; set; }
         public string backgroundImage { get; set; }
+        public string address { get; set; }
         public void OnDelete()
         {
             if (UserPrivileges.Count > 0)

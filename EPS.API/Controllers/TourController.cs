@@ -37,7 +37,6 @@ namespace EPS.API.Controllers
         }
 
         #region tour
-        [CustomAuthorize(PrivilegeList.ManageTour)]
         [HttpGet]
         public async Task<IActionResult> GetListTours([FromQuery] TourGridPagingDto pagingModel)
         {
@@ -187,7 +186,7 @@ namespace EPS.API.Controllers
                 {
                     var tourDetailViewModel = new TourDetailViewModel(dto.id, dto.category_id, dto.name, dto.url,
                         dto.created_time.ToString("dd/M/yyyy", CultureInfo.InvariantCulture), dto.status, dto.background_image,
-                        tourDetail.price, tourDetail.infor, tourDetail.intro, tourDetail.schedule, tourDetail.policy, tourDetail.note);
+                        tourDetail.price, tourDetail.infor, tourDetail.intro, tourDetail.schedule, tourDetail.policy, tourDetail.note, tourDetail.tour_guide, tourDetail.isurance);
                     result.ResultObj = tourDetailViewModel;
                     result.Message = "";
                     result.statusCode = 200;

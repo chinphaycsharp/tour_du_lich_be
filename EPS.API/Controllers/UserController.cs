@@ -34,7 +34,7 @@ namespace EPS.API.Controllers
         }
 
         [CustomAuthorize(PrivilegeList.ManageUser)]
-        [HttpGet("list")]
+        [HttpGet()]
         public async Task<IActionResult> GetUsers([FromQuery] UserGridPagingDto pagingModel)
         {
             return Ok(await _authorizationService.GetUsers(pagingModel));
@@ -116,14 +116,19 @@ namespace EPS.API.Controllers
             if (Request.Form.Files.Count > 0)
             {
                 var file = Request.Form.Files[0];
-                newUser.backgroundImage = "avartar//" + file.FileName;
-                var path = Path.Combine(_webHostEnvironment.WebRootPath, "images\\avartar", file.FileName);
+                newUser.backgroundImage =  file.FileName;
+                var path = Path.Combine(_webHostEnvironment.WebRootPath, "common", file.FileName);
                 using (var fileSteam = new FileStream(path, FileMode.Create))
                 {
                     await file.CopyToAsync(fileSteam);
                 }
             }
-            var isAdmin = newUser.RoleIds.Any(x => x == 1);
+            var roleIds = JsonConvert.DeserializeObject<List<int>>(newUser.RoleIds);
+            foreach(int r in roleIds)
+            {
+                newUser.Roles.Add(r);
+            }
+            var isAdmin = roleIds.Any(x => x == 1);
             if (isAdmin)
             {
                 newUser.IsAdministrator = true;
@@ -153,6 +158,10 @@ namespace EPS.API.Controllers
             ApiResult<bool> result = new ApiResult<bool>();
             var roleIds = JsonConvert.DeserializeObject<List<int>>(editedUser.RoleIds);
             var isAdmin = roleIds.Any(x => x == 1);
+            foreach (int r in roleIds)
+            {
+                editedUser.Roles.Add(r);
+            }
             if (isAdmin)
             {
                 editedUser.IsAdministrator = true;
@@ -161,7 +170,7 @@ namespace EPS.API.Controllers
             {
                 var file = Request.Form.Files[0];
                 editedUser.backgroundImage = file.FileName;
-                var path = Path.Combine(_webHostEnvironment.WebRootPath, "images", file.FileName);
+                var path = Path.Combine(_webHostEnvironment.WebRootPath, "common", file.FileName);
                 using (var fileSteam = new FileStream(path, FileMode.Create))
                 {
                     await file.CopyToAsync(fileSteam);

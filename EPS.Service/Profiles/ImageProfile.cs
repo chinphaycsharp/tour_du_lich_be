@@ -22,9 +22,9 @@ namespace EPS.Service.Profiles
         public ImageProfileEntityToDto()
         {
             CreateMap<image, ImageGridDto>()
-               .ForMember(dest => dest.img_src, mo => mo.MapFrom(src => "http://192.168.1.5:5001/uploads/" + src.img_src));
+               .ForMember(dest => dest.img_src, mo => mo.MapFrom(src => "http://192.168.1.6:5001/uploads/" + src.img_src));
             CreateMap<image, ImageGridDto>()
-              .ForMember(dest => dest.img_src, mo => mo.MapFrom(src => "http://192.168.1.5:5001/common/blog/" + src.img_src));
+              .ForMember(dest => dest.img_src, mo => mo.MapFrom(src => "http://192.168.1.6:5001/common/blog/" + src.img_src));
         }
     }
 }

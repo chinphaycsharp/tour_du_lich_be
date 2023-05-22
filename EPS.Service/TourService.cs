@@ -6,6 +6,7 @@ using EPS.Service.Dtos.TourDetail;
 using EPS.Service.Helpers;
 using EPS.Utils.Service;
 using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -39,6 +40,26 @@ namespace EPS.Service
         {
             var id = await _repository.Filter<detail_tour>(x => x.id_tour == Tourid).FirstOrDefaultAsync();
             return id;
+        }
+
+        public async Task<List<TourGridDto>> GetTourBycategoryId(int category_id)
+        {
+            var result = await _repository.Filter<tour>(x => x.category_id == category_id).ToListAsync();
+            List<TourGridDto> hotels = new List<TourGridDto>();
+            foreach (var item in result)
+            {
+                TourGridDto hotel = new TourGridDto()
+                {
+                    id = item.id,
+                    category_id = item.category_id,
+                    name = item.name,
+                    status = item.status,
+                    background_image = item.background_image,
+                    url = item.url
+                };
+                hotels.Add(hotel);
+            }
+            return hotels;
         }
 
         public async Task<int> CreateTours(TourCreateDto dto, bool isExploiting = false)
@@ -102,13 +123,15 @@ namespace EPS.Service
             if (detailtour != null)
             {
                 DetailTourDetailDto dto = new DetailTourDetailDto();
-                detailtour.id = dto.id;
-                detailtour.id_tour = tourId;
-                detailtour.price = dto.price;
-                detailtour.infor = dto.infor;
-                detailtour.schedule = dto.schedule;
-                detailtour.policy = dto.policy;
-                detailtour.note = dto.note;
+                dto.id = detailtour.id;
+                dto.id_tour = tourId;
+                dto.price = detailtour.price;
+                dto.infor = detailtour.infor;
+                dto.schedule = detailtour.schedule;
+                dto.policy = detailtour.policy;
+                dto.note = detailtour.note;
+                dto.isurance = detailtour.isurance;
+                dto.tour_guide = detailtour.tour_guide;
                 return dto;
             }
             return new DetailTourDetailDto();

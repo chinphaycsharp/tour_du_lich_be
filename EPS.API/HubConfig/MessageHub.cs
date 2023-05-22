@@ -4,6 +4,7 @@ using EPS.Service;
 using Microsoft.AspNetCore.SignalR;
 using System;
 using System.Globalization;
+using System.Linq;
 
 namespace EPS.API.HubConfig
 {
@@ -17,7 +18,7 @@ namespace EPS.API.HubConfig
             _context = context;
         }
 
-        public async void EvaluateTour(int id_tour, string messageSend, int starCount)
+        public async void SendMessage(int id_tour, string messageSend, int starCount)
         {
             var strDate = DateTime.Now.ToString("dd/M/yyyy", CultureInfo.InvariantCulture);
             evaluate_tour m = new evaluate_tour();
@@ -31,11 +32,11 @@ namespace EPS.API.HubConfig
             // await _messageService.SaveMessage(messageDto);
         }
 
-        public void NewUser(string userName, string connectionId)
+        public void GetMessage(int id_tour, string connectionId)
         {
-            //var data = (from d in _context.message orderby d.createdDate select d).ToList();
-            //Clients.Client(connectionId).SendAsync("PreviousMessage", data);
-            //Clients.All.SendAsync("NewUser", userName);
+            var data = _context.evaluate_tours.OrderBy(x=>x.created_time).Where(x=>x.id_tour == id_tour).Select(x=>x).ToList();
+            Clients.Client(connectionId).SendAsync("PreviousMessage", data);
+            Clients.All.SendAsync("GetMessage", id_tour);
         }
     }
 }

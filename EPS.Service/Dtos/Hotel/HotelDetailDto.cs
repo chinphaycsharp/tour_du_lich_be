@@ -11,6 +11,7 @@ namespace EPS.Service.Dtos.Hotel
         public string name { get; set; }
         public DateTime created_time { get; set; }
         public DateTime updated_time { get; set; }
+        public string background_image { get; set; }
         public string updated_timeStr { get; set; }
         public string created_timeStr { get; set; }
         public int status { get; set; }

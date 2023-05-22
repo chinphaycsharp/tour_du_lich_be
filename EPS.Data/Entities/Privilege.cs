@@ -44,6 +44,8 @@ namespace EPS.Data.Entities
         [Description("Quản lý ảnh")]
         ManageImage,
         [Description("Quản lý blog")]
-        ManageBlog
+        ManageBlog,
+        [Description("Quản lý tin tức")]
+        ManageContact
     }
 }

@@ -32,17 +32,17 @@ namespace EPS.Service
             return dto.id;
         }
 
-        public async Task<int> DeleteCategory(int id)
+        public async Task<int> DeleteContact(int id)
         {
             return await _baseService.DeleteAsync<contact, int>(id);
         }
 
-        public async Task<int> UpdateCategory(int id, ContactUpdateDto dto)
+        public async Task<int> UpdateContact(int id, ContactUpdateDto dto)
         {
             return await _baseService.UpdateAsync<contact, ContactUpdateDto>(id, dto);
         }
 
-        public async Task<ContactDetailDto> GetCategoryById(int id)
+        public async Task<ContactDetailDto> GetContactById(int id)
         {
             return await _baseService.FindAsync<contact, ContactDetailDto>(id);
         }

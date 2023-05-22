@@ -1,11 +1,16 @@
 ﻿using EPS.API.Commons;
 using EPS.API.Helpers;
 using EPS.API.Models.Tour;
+using EPS.Data.Entities;
 using EPS.Service;
+using EPS.Service.Dtos.Blog;
+using EPS.Service.Dtos.Category;
 using EPS.Service.Dtos.Common.EvaluateTour;
 using EPS.Service.Dtos.Common.RegisterTour;
 using EPS.Service.Dtos.Contact;
 using EPS.Service.Dtos.Email;
+using EPS.Service.Dtos.Hotel;
+using EPS.Service.Dtos.ImageBlog;
 using EPS.Service.Dtos.Tour;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -26,7 +31,13 @@ namespace EPS.API.Controllers
         private HotelService _hotelService;
         private EmailService _emailService;
         private ContactService _contactService;
-        public CommonController(RegisterTourService registerTourService, EvaluateTourService evaluateTourService, TourService tourService, HotelService hotelService, EmailService emailService, ContactService contactService)
+        private BlogService _blogService;
+        private ImageService _imageService;
+        private CategoryService _categoryService;
+
+        public CommonController(RegisterTourService registerTourService, EvaluateTourService evaluateTourService, 
+            TourService tourService, HotelService hotelService, EmailService emailService, ContactService contactService, 
+            BlogService blogService,ImageService imageService, CategoryService categoryService, LookupService lookupService)
         {
             _registerTourService = registerTourService;
             _evaluateTourService = evaluateTourService;
@@ -34,6 +45,9 @@ namespace EPS.API.Controllers
             _hotelService = hotelService;
             _emailService = emailService;
             _contactService = contactService;
+            _blogService = blogService;
+            _imageService = imageService;
+            _categoryService = categoryService;
         }
 
         #region tours
@@ -43,7 +57,7 @@ namespace EPS.API.Controllers
             return Ok(await _tourService.GetTours(pagingModel));
         }
 
-        [HttpGet("getbyid/{id}")]
+        [HttpGet("gettourbyid/{id}")]
         public async Task<ApiResult<TourDetailViewModel>> GetTourById(int id)
         {
             ApiResult<TourDetailViewModel> result = new ApiResult<TourDetailViewModel>();
@@ -55,7 +69,7 @@ namespace EPS.API.Controllers
                 {
                     var tourDetailViewModel = new TourDetailViewModel(dto.id, dto.category_id, dto.name, dto.url,
                         dto.created_time.ToString("dd/M/yyyy", CultureInfo.InvariantCulture), dto.status, dto.background_image,
-                        tourDetail.price, tourDetail.infor, tourDetail.intro, tourDetail.schedule, tourDetail.policy, tourDetail.note);
+                        tourDetail.price, tourDetail.infor, tourDetail.intro, tourDetail.schedule, tourDetail.policy, tourDetail.note,tourDetail.tour_guide,tourDetail.isurance);
                     result.ResultObj = tourDetailViewModel;
                     result.Message = "";
                     result.statusCode = 200;
@@ -78,27 +92,65 @@ namespace EPS.API.Controllers
             }
         }
 
-        //[CustomAuthorize(PrivilegeList.ManageTour)]
-        //[HttpGet("getdetailtourbyid/{id}")]
-        //public async Task<ApiResult<DetailTourDetailDto>> GetTourDetailById(int id)
-        //{
-        //    ApiResult<DetailTourDetailDto> result = new ApiResult<DetailTourDetailDto>();
-        //    var dto = await _tourService.GetTourDetailById(id);
-        //    if (dto != null)
-        //    {
-        //        result.ResultObj = dto;
-        //        result.Message = "";
-        //        result.statusCode = 200;
-        //        return result;
-        //    }
-        //    else
-        //    {
-        //        result.ResultObj = dto;
-        //        result.Message = "Đã có lỗi xẩy ra với hệ thống, vui lòng thử lại !";
-        //        result.statusCode = 500;
-        //        return result;
-        //    }
-        //}
+        [HttpGet("blogs")]
+        public async Task<IActionResult> GetBlogs([FromQuery] BlogPagingGridDto pagingModel)
+        {
+            return Ok(await _blogService.GetBlog(pagingModel));
+        }
+
+        [HttpGet("getblogbyid/{id}")]
+        public async Task<ApiResult<BlogDetailDto>> GetBlogById(int id)
+        {
+            ApiResult<BlogDetailDto> result = new ApiResult<BlogDetailDto>();
+            var dto = await _blogService.GetBlogById(id);
+            if (dto != null)
+            {
+                result.ResultObj = dto;
+                result.Message = "";
+                result.statusCode = 200;
+                return result;
+            }
+            else
+            {
+                result.ResultObj = dto;
+                result.Message = "Đã có lỗi xẩy ra với hệ thống, vui lòng thử lại !";
+                result.statusCode = 500;
+                return result;
+            }
+        }
+
+        [HttpGet("hotels")]
+        public async Task<IActionResult> GetHotels([FromQuery] HotelPagingGridDto pagingModel)
+        {
+            return Ok(await _hotelService.GetHotels(pagingModel));
+        }
+
+        [HttpGet("gethotelbyid/{id}")]
+        public async Task<ApiResult<HotelDetailDto>> GetHotelById(int id)
+        {
+            ApiResult<HotelDetailDto> result = new ApiResult<HotelDetailDto>();
+            var dto = await _hotelService.GetHotelById(id);
+            if (dto != null)
+            {
+                result.ResultObj = dto;
+                result.Message = "";
+                result.statusCode = 200;
+                return result;
+            }
+            else
+            {
+                result.ResultObj = dto;
+                result.Message = "Đã có lỗi xẩy ra với hệ thống, vui lòng thử lại !";
+                result.statusCode = 500;
+                return result;
+            }
+        }
+
+        [HttpGet("categories")]
+        public async Task<IActionResult> GetListCategories([FromQuery] CategoryGridPagingDto pagingModel)
+        {
+            return Ok(await _categoryService.GetCategories(pagingModel));
+        }
         #endregion
 
         #region register_tours
@@ -260,5 +312,75 @@ namespace EPS.API.Controllers
             }
         }
         #endregion
+
+        [HttpGet("images")]
+        public async Task<IActionResult> GetListImageBlogs([FromQuery] ImageGridPagingDto pagingModel)
+        {
+            return Ok(await _imageService.GetImageBlogs(pagingModel));
+        }
+
+        [HttpGet("gethotelbycategoryid/{id}")]
+        public async Task<ApiResult<List<HotelGridDto>>> GetHotelByCategoryId(int id)
+        {
+            ApiResult<List<HotelGridDto>> result = new ApiResult<List<HotelGridDto>>();
+            var dto = await _hotelService.GetHotelByCategoryId(id);
+            if (dto != null)
+            {
+                result.ResultObj = dto;
+                result.Message = "";
+                result.statusCode = 200;
+                return result;
+            }
+            else
+            {
+                result.ResultObj = dto;
+                result.Message = "Đã có lỗi xẩy ra với hệ thống, vui lòng thử lại !";
+                result.statusCode = 500;
+                return result;
+            }
+        }
+
+        [HttpGet("gettourbycategoryid/{id}")]
+        public async Task<ApiResult<List<TourGridDto>>> GetTourByCategoryId(int id)
+        {
+            ApiResult<List<TourGridDto>> result = new ApiResult<List<TourGridDto>>();
+            var dto = await _tourService.GetTourBycategoryId(id);
+            if (dto != null)
+            {
+                result.ResultObj = dto;
+                result.Message = "";
+                result.statusCode = 200;
+                return result;
+            }
+            else
+            {
+                result.ResultObj = dto;
+                result.Message = "Đã có lỗi xẩy ra với hệ thống, vui lòng thử lại !";
+                result.statusCode = 500;
+                return result;
+            }
+        }
+
+        
+        [HttpGet("getcommenttour/{id}")]
+        public async Task<ApiResult<List<EvaluateTourGridDto>>> GetCommentTour(int id)
+        {
+            ApiResult<List<EvaluateTourGridDto>> result = new ApiResult<List<EvaluateTourGridDto>>();
+            var dto = await _evaluateTourService.GetEvaluateTours(id);
+            if (dto != null)
+            {
+                result.ResultObj = dto;
+                result.Message = "";
+                result.statusCode = 200;
+                return result;
+            }
+            else
+            {
+                result.ResultObj = dto;
+                result.Message = "Đã có lỗi xẩy ra với hệ thống, vui lòng thử lại !";
+                result.statusCode = 500;
+                return result;
+            }
+        }
     }
 }

@@ -7,7 +7,6 @@ namespace EPS.Data.Entities
     {
         public blog()
         {
-            image_blogs = new HashSet<image>();
         }
 
         public int id { get; set; }
@@ -16,6 +15,5 @@ namespace EPS.Data.Entities
         public string img_src { get; set; }
         public DateTime created_time { get; set; }
         public DateTime updated_time { get; set; }
-        public virtual ICollection<image> image_blogs { get; set; }
     }
 }

@@ -18,5 +18,6 @@ namespace EPS.Data.Entities
         public string note { get; set; }
         public string background_image { get; set; }
         public string tour_guide { get; set; }
+        public string isurance { get; set; }
     }
 }

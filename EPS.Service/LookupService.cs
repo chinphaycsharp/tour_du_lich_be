@@ -112,7 +112,7 @@ namespace EPS.Service
             string[] result = new string[3];
             var totalRegister = await _baseService.All<register_tour, RegisterTourGridDto>().CountAsync();
             var totalTour = await _baseService.All<tour, TourGridDto>().CountAsync();
-            var totalPrice = await _baseService.All<v_detail_tour_register, DetailTourGridDto>().SumAsync(x => Convert.ToInt32(x.price));
+            var totalPrice = await _baseService.All<v_detail_tour_register, DetailTourGridDto>().SumAsync(x => Convert.ToInt64(x.price));
             result[0] = totalRegister.ToString();
             result[1] = totalTour.ToString();
             result[2] = totalPrice.ToString();

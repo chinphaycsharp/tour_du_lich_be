@@ -121,7 +121,7 @@ namespace EPS.API
             services.AddCors(options =>
             {
                 options.AddPolicy("CorsPolicy", builder => builder
-                    .WithOrigins("http://localhost:4200", "http://localhost:60531", "http://localhost:4100", "http://localhost:5200", "http://localhost:3000")
+                    .WithOrigins("http://localhost:4200", "http://localhost:60531", "http://localhost:4100", "http://localhost:5200", "http://localhost:3000", "http://localhost:3001")
                     .AllowAnyMethod()
                     .AllowAnyHeader()
                     .AllowCredentials());

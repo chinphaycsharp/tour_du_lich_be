@@ -16,9 +16,15 @@ namespace EPS.Service.Dtos.User
         public string PhoneNumber { get; set; }
         public bool IsAdministrator { get; set; }
         public int UnitId { get; set; }
-        public List<int> RoleIds { get; set; }
+        public string RoleIds { get; set; }
+        public List<int> Roles { get; set; }
         public DateTime CreateDate { get; set; }
         public string backgroundImage { get; set; }
-        public string? Address { get; set; }
+        public string? address { get; set; }
+
+        public UserCreateDto()
+        {
+            Roles = new List<int>();
+        }
     }
 }

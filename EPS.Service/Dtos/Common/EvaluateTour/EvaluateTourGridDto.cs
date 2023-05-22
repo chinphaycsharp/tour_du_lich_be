@@ -13,7 +13,9 @@ namespace EPS.Service.Dtos.Common.EvaluateTour
         public string content { get; set; }
         public int star_count { get; set; }
         public DateTime created_time { get; set; }
+        public string created_timeStr { get; set; }
         public DateTime updated_time { get; set; }
+        public string updated_timeStr { get; set; }
         public int status { get; set; }
     }
 }

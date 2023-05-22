@@ -172,13 +172,19 @@ namespace EPS.Service
             var db = _repository.GetDbContext<EPSContext>();
             var userRoles = await db.UserRoles.Include(x => x.Role).Where(x => x.UserId == userId).ToListAsync();
             var role = userRoles.Where(x => roles.Contains(x.RoleId)).ToList();
-
-            foreach (var removingRole in userRoles.Where(x => roles.Contains(x.RoleId)))
+            try
             {
-                db.Remove(removingRole);
-            }
+                foreach (var removingRole in userRoles.Where(x => roles.Contains(x.RoleId)))
+                {
+                    db.UserRoles.Remove(removingRole);
+                }
 
-            await db.SaveChangesAsync();
+                await db.SaveChangesAsync();
+            }
+            catch(Exception ex)
+            {
+
+            }
         }
 
         public async Task<bool> ChangePassword(string userName, ChangePasswordDto model)
@@ -296,7 +302,7 @@ namespace EPS.Service
                 }
                 else
                 {
-                    await SaveUserRoles(entityUser.Id, newUser.RoleIds);
+                    await SaveUserRoles(entityUser.Id, newUser.Roles);
                     // Must log manually if not using BaseService
                     _logger.Log(Microsoft.Extensions.Logging.LogLevel.Information, default(EventId), new ExtraPropertyLogger("User {username} added new {entity} {identifier}", _userIdentity.Username, typeof(User).Name, entityUser.ToString()).AddProp("data", entityUser), null, ExtraPropertyLogger.Formatter);
                 }
@@ -339,7 +345,9 @@ namespace EPS.Service
             {
                 await _baseService.UpdateAsync<User, UserUpdateDto>(id, editedUser);
                 //List<int> roleIds = editedUser.RoleIds.ToList();
-                await SaveUserRoles(id, roleIds);
+                await SaveUserRoles(id,editedUser.Roles);
+
+                //await SaveUserRoles(id, roleIds);
                 if (!string.IsNullOrEmpty(editedUser.NewPassword))
                 {
                     var user = await _baseService.GetDbContext<Data.EPSContext>().Users.FindAsync(id);

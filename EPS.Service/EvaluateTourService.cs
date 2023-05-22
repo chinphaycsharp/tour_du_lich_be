@@ -5,6 +5,9 @@ using EPS.Service.Dtos.Common.Evaluate_tour;
 using EPS.Service.Dtos.Common.EvaluateTour;
 using EPS.Service.Helpers;
 using EPS.Utils.Service;
+using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
+using System.Globalization;
 using System.Threading.Tasks;
 
 namespace EPS.Service
@@ -22,9 +25,25 @@ namespace EPS.Service
             _baseService = new EPSBaseService(repository, mapper);
         }
 
-        public async Task<PagingResult<EvaluateTourGridDto>> GetEvaluateTours(EvaluateTourGridPagingDto dto)
+        public async Task<List<EvaluateTourGridDto>> GetEvaluateTours(int tour_id)
         {
-            return await _baseService.FilterPagedAsync<evaluate_tour, EvaluateTourGridDto>(dto);
+            var result = await _repository.Filter<evaluate_tour>(x => x.id_tour == tour_id).ToListAsync();
+            List<EvaluateTourGridDto> evaluateTours = new List<EvaluateTourGridDto>();
+            foreach (var item in result)
+            {
+                EvaluateTourGridDto evaluateTour = new EvaluateTourGridDto()
+                {
+                    id = item.id,
+                    id_tour = item.id_tour,
+                    content = item.content,
+                    star_count = item.star_count,
+                    created_timeStr = item.created_time.ToString("dd/M/yyyy", CultureInfo.InvariantCulture),
+                    updated_timeStr = item.updated_time.ToString("dd/M/yyyy", CultureInfo.InvariantCulture),
+                    status = item.status,
+                };
+                evaluateTours.Add(evaluateTour);
+            }
+            return evaluateTours;
         }
 
         public async Task<int> EvaluateTours(EvaluateTourCreateDto dto, bool isExploiting = false)
@@ -43,7 +62,7 @@ namespace EPS.Service
             return await _baseService.UpdateAsync<evaluate_tour, EvaluateTourUpdateDto>(id, dto);
         }
 
-        public async Task<EvaluateTourDetailDto> GetCategoryById(int id)
+        public async Task<EvaluateTourDetailDto> GetEvaluateTourById(int id)
         {
             return await _baseService.FindAsync<evaluate_tour, EvaluateTourDetailDto>(id);
         }

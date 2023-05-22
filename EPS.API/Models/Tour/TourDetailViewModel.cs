@@ -18,13 +18,15 @@ namespace EPS.API.Models.Tour
         public string schedule { get; set; }
         public string policy { get; set; }
         public string note { get; set; }
-
+        public string tour_guide { get; set; }
+        public string isurance { get; set; }
         public TourDetailViewModel()
         {
 
         }
 
-        public TourDetailViewModel(int id, int category_id, string name, string url, string created_timeStr, int status, string background_image, string price, string infor, string intro, string schedule, string policy, string note)
+        public TourDetailViewModel(int id, int category_id, string name, string url, string created_timeStr, int status,
+            string background_image, string price, string infor, string intro, string schedule, string policy, string note, string Tour_guide, string Isurance)
         {
             this.id = id;
             this.category_id = category_id;
@@ -39,6 +41,8 @@ namespace EPS.API.Models.Tour
             this.schedule = schedule;
             this.policy = policy;
             this.note = note;
+            this.tour_guide = Tour_guide;
+            this.isurance = Isurance;
         }
     }
 }
