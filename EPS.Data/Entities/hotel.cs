@@ -19,6 +19,7 @@ namespace EPS.Data.Entities
         [InverseProperty("hotels")]
         public virtual category category { get; set; }
         public string name { get; set; }
+        public string background_image { get; set; }
         public DateTime created_time { get; set; }
         public DateTime updated_time { get; set; }
         public int status { get; set; }
