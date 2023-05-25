@@ -2,6 +2,7 @@
 using EPS.Data.Entities;
 using EPS.Service.Dtos.Hotel;
 using EPS.Service.Dtos.Tour;
+using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
 using System.Globalization;

@@ -167,7 +167,7 @@ namespace EPS.API.Controllers
                 var detailTour = await _tourService.GetDetailTourById(dto.id_tour);
                 var hotels = await _hotelService.GetHotelByCategoryId(tour.category_id);
                 List<string> inforTour = new List<string>();
-                MatchCollection matches = Regex.Matches(detailTour.infor, @"<strong>.*?</strong>");
+                MatchCollection matches = Regex.Matches(detailTour.infor, @"(?<=.>).*?(?=</.+>)");
 
                 // Use foreach-loop.
                 foreach (Match match in matches)
@@ -177,15 +177,8 @@ namespace EPS.API.Controllers
                         inforTour.Add(capture.Value);
                     }
                 }
-                var x = inforTour[0] != null ? inforTour[0] : "";
-                string body = @"<p>Xin chào: " + dto.name_register + "</p>" +
-                                @"<p>Sau đây là thông tin của tour:</p>" +
-                                @"<p>Tên: " + tour.name + "</p>" +
-                                @"<p>Giá: " + detailTour.price + "</p>" +
-                                @"<p>" + inforTour[0] + " " + inforTour[1] + "</p>" +
-                                @"<p>" + inforTour[2] + " " + inforTour[3] + "</p>" +
-                                @"<p>" + inforTour[4] + " " + inforTour[5] + "</p>" +
-                                @"<p>" + inforTour[6] + " " + inforTour[7] + "</p>";
+                var x = inforTour.Count > 2 ? inforTour[1] : "" ;
+                string body = $"<p>Xin chào:{dto.name_register}</p>\n<p>Sau đây là thông tin của tour:</p>\n<p>Tên:{tour.name}</p>\n <p>Giá: {detailTour.price}VND</p>\n<p>{(inforTour.Count > 1 ? inforTour[0] : "")} {(inforTour.Count > 2 ? inforTour[1] : "")}</p>\n<p>{(inforTour.Count > 3 ? inforTour[2] : "")} {(inforTour.Count > 4 ? inforTour[3] : "")}</p>\n<p>{(inforTour.Count > 5 ? inforTour[4] : "")} {(inforTour.Count > 6 ? inforTour[5] : "")}</p>\n<p>{(inforTour.Count > 7 ? inforTour[6] : "")}</p>";
                 UserEmailOptions options = new UserEmailOptions()
                 {
                     ToEmails = dto.email_register,
@@ -194,10 +187,10 @@ namespace EPS.API.Controllers
 
                 if (hotels.Count > 0)
                 {
-                    body = body + @"<p>Khách sạn: " + hotels[0].name + ", " + hotels[1].name + ", " + hotels[2].name + "</p>";
+                    body = body + $"<p>Khách sạn: {(hotels.Count > 1 ? hotels[0].name : " ")}, {(hotels.Count > 2 ? hotels[1].name : " ")}, {(hotels.Count > 3 ? hotels[2].name : " ")}</p>";
                 }
                 body = body + @"<p>Cảm ơn bạn đã tham khảo dịch vụ của chúng tôi. Chúng tôi sẽ liên hệ theo số điện thoại mà bạn cung cấp!!!</p>" +
-                                @"<p>Thân ái!!!</p>";
+                               @"<p>Thân ái!!!</p>";
 
                 options.Body = body;
 

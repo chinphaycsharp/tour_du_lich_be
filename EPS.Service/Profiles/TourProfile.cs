@@ -26,7 +26,7 @@ namespace EPS.Service.Profiles
             CreateMap<tour, TourGridDto>()
                 .ForMember(dest => dest.created_timeStr, mo => mo.MapFrom(src => src.created_time.ToString("dd/M/yyyy", CultureInfo.InvariantCulture)))
                  .ForMember(dest => dest.updated_timeStr, mo => mo.MapFrom(src => src.updated_time.ToString("dd/M/yyyy", CultureInfo.InvariantCulture)))
-                 .ForMember(dest => dest.background_image, mo => mo.MapFrom(src => "http://192.168.1.6:5001/uploads/" + src.background_image));
+                 .ForMember(dest => dest.background_image, mo => mo.MapFrom(src => "http://192.168.1.3:5001/uploads/" + src.background_image));
 
             CreateMap<detail_tour, TourDetailDto>();
 

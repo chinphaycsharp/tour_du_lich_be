@@ -2,6 +2,7 @@
 using EPS.Data.Entities;
 using EPS.Service.Dtos.Contact;
 using EPS.Service.Dtos.ImageBlog;
+using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -19,12 +20,13 @@ namespace EPS.Service.Profiles
 
     public class ImageProfileEntityToDto : Profile
     {
-        public ImageProfileEntityToDto()
+        public ImageProfileEntityToDto() 
         {
+           
             CreateMap<image, ImageGridDto>()
-               .ForMember(dest => dest.img_src, mo => mo.MapFrom(src => "http://192.168.1.6:5001/uploads/" + src.img_src));
+               .ForMember(dest => dest.img_src, mo => mo.MapFrom(src => "http://192.168.1.3:5001/uploads/" + src.img_src));
             CreateMap<image, ImageGridDto>()
-              .ForMember(dest => dest.img_src, mo => mo.MapFrom(src => "http://192.168.1.6:5001/common/blog/" + src.img_src));
+              .ForMember(dest => dest.img_src, mo => mo.MapFrom(src => "http://192.168.1.3:5001/common/blog/" + src.img_src));
         }
     }
 }
