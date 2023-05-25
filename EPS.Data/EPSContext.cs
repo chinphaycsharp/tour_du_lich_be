@@ -29,7 +29,6 @@ namespace EPS.Data
         public virtual DbSet<hotel> hotels { get; set; }
         public virtual DbSet<tour> tours { get; set; }
         public virtual DbSet<detail_tour> detail_tours { get; set; }
-        public virtual DbSet<tour_connect_hotel> tour_connect_hotels { get; set; }
         public virtual DbSet<evaluate_tour> evaluate_tours { get; set; }
         public virtual DbSet<register_tour> register_tours { get; set; }
         public virtual DbSet<blog> blogs { get; set; }
@@ -63,11 +62,6 @@ namespace EPS.Data
             modelBuilder.Entity<RolePrivilege>(entity =>
             {
                 entity.HasKey(e => new { e.RoleId, e.PrivilegeId });
-            });
-
-            modelBuilder.Entity<tour_connect_hotel>(entity =>
-            {
-                entity.HasKey(e => new { e.id_tour, e.id_hotel });
             });
 
             modelBuilder.Entity<hotel>()
