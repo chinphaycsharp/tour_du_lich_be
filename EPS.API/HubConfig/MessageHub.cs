@@ -28,15 +28,8 @@ namespace EPS.API.HubConfig
             m.created_time = DateTime.Now; 
             await _context.evaluate_tours.AddAsync(m);
             _context.SaveChanges();
+            var comments = _context.evaluate_tours.Where(x => x.id_tour == id_tour).ToList();
             await Clients.All.SendAsync("SendMessage", id_tour, messageSend, starCount);
-            // await _messageService.SaveMessage(messageDto);
-        }
-
-        public void GetMessage(int id_tour, string connectionId)
-        {
-            var data = _context.evaluate_tours.OrderBy(x=>x.created_time).Where(x=>x.id_tour == id_tour).Select(x=>x).ToList();
-            Clients.Client(connectionId).SendAsync("PreviousMessage", data);
-            Clients.All.SendAsync("GetMessage", id_tour);
         }
     }
 }

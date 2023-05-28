@@ -24,7 +24,6 @@ namespace EPS.Service.Dtos.Common.RegisterTour
             {
                 predicates.Add(x => x.id_tour == id_tour);
             }
-            predicates.Add(x => x.status == 1);
             return predicates;
         }
     }

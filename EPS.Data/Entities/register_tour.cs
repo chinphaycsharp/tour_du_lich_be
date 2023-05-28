@@ -20,6 +20,6 @@ namespace EPS.Data.Entities
         public DateTime created_time { get; set; }
         public DateTime updated_time { get; set; }
         public int status { get; set; }
-        public int payment_method { get; set; }
+        public string payment_method { get; set; }
     }
 }
