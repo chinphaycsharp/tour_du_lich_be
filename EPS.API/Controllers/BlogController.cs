@@ -174,10 +174,16 @@ namespace EPS.API.Controllers
                     try
                     {
                         var path = Path.Combine(_webHostEnvironment.WebRootPath, "common/blog", item.FileName);
+                        if (dto.type_id == 0)
+                        {
+                            int lastId = await _blogService.GetLastBlogRecord();
+                            dto.type_id = lastId;
+                        }
                         ImageCreateDto imagetour = new ImageCreateDto(dto.type_id, item.FileName, dto.type);
+                        int resultCreate = 0;
 
-                        var id = await _imageService.CreateImageBlogs(imagetour);
-                        if (id == 0)
+                        resultCreate = await _imageService.CreateImageBlogs(imagetour);
+                        if (resultCreate == 0)
                         {
                             using (var fileSteam = new FileStream(path, FileMode.Create))
                             {

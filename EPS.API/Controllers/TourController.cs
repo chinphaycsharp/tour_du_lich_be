@@ -232,6 +232,11 @@ namespace EPS.API.Controllers
                     try
                     {
                         var path = Path.Combine(_webHostEnvironment.WebRootPath, "uploads", item.FileName);
+                        if (dto.type_id == 0)
+                        {
+                            int lastId = await _tourService.GetLastTourRecord();
+                            dto.type_id = lastId;
+                        }
                         ImageCreateDto imagetour = new ImageCreateDto(dto.type_id, item.FileName, dto.type);
                         var id = await _imageTourService.CreateImageTours(imagetour);
                         using (var fileSteam = new FileStream(path, FileMode.Create))

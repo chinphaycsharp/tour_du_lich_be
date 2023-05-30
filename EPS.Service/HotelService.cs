@@ -8,6 +8,7 @@ using EPS.Service.Helpers;
 using EPS.Utils.Service;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace EPS.Service
@@ -23,6 +24,13 @@ namespace EPS.Service
             _repository = repository;
             _mapper = mapper;
             _baseService = new EPSBaseService(repository, mapper);
+        }
+
+
+        public async Task<int> GetLastHotelRecord()
+        {
+            var id = await _repository.Filter<hotel>(x => x.id > 0).Select(x => x.id).MaxAsync();
+            return id;
         }
 
         public async Task<PagingResult<HotelGridDto>> GetHotels(HotelPagingGridDto dto)
